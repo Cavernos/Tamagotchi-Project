@@ -1,10 +1,5 @@
 class Player:
     """
-<<<<<<< HEAD
-    Management of the Player
-    """
-    def __init__(self, biscuit: int = 50, name: str = "PLayer") -> None:
-=======
     A classed used to represent a Player
     ...
 
@@ -24,19 +19,11 @@ class Player:
         biscuit : int
             The number of biscuit got by the Player
         """
->>>>>>> 7c3609611401bcf3410429071bf2d72efdec8f0c
         self._name: str = name
         self._biscuit: int = biscuit
 
     @property
     def biscuit(self) -> int:
-<<<<<<< HEAD
-        return self._biscuit
-
-    @biscuit.setter
-    def biscuit(self, value: int) -> None:
-        self._biscuit = value
-=======
         """
         Biscuit Property equivalent of getter
         """
@@ -64,4 +51,3 @@ class Player:
         self._name = value
 
 
->>>>>>> 7c3609611401bcf3410429071bf2d72efdec8f0c
