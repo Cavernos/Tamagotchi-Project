@@ -1,5 +1,3 @@
-import inspect
-
 from Game import Game
 from Player import Player
 from Tamagotchi import Tamagotchi
@@ -31,3 +29,4 @@ game = Game()
 game.start()
 while game.is_day:
     print(0)
+
