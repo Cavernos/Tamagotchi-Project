@@ -28,4 +28,6 @@ def main():
 
 
 game = Game()
-game.is_day()
+game.start()
+while game.is_day:
+    print(0)
