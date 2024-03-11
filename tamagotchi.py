@@ -51,4 +51,4 @@ class Tamagotchi:
 
     def feed(self, player: Player) -> None:
         self.hunger += 50
-        player.biscuit(player.biscuit() - 1)
+        player.biscuit = player.biscuit - 1
