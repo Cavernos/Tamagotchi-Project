@@ -49,5 +49,3 @@ class Player:
         Name Setter
         """
         self._name = value
-
-
