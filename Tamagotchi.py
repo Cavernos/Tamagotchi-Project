@@ -41,26 +41,29 @@ class Tamagotchi:
     
     # setter
     @health.setter
-    def health(self, number: int) -> None:
-        self.health += number
+    def health(self, value: int) -> None:
+        self._health = value
 
     @tiredness.setter
-    def tiredness(self, number: int) -> None:
-        self.tiredness += number
+    def tiredness(self, value: int) -> None:
+        self._tiredness = value
 
     @boredom.setter
-    def boredom(self, number: int) -> None:
-        self.boredom += number
+    def boredom(self, value: int) -> None:
+        self._boredom = value
 
     @hunger.setter
-    def hunger(self, number: int) -> None:
-        self.hunger += number
+    def hunger(self, value: int) -> None:
+        self._hunger = value
 
     # methods
     def play(self) -> None:
-        self.boredom += 50
-        self.tiredness -= 50
+        self.boredom = self.boredom + 50
+        self.tiredness = self.tiredness - 50
 
     def feed(self, player: Player) -> None:
-        self.hunger += 50
-        player.biscuit = player.biscuit - 1
+        self.hunger = self.hunger - 50
+        if player.biscuit > 0:
+            player.biscuit = player.biscuit - 1
+        else:
+            print("Vous n'avez plus de croquettes")
