@@ -4,4 +4,4 @@
 ```
 
 # Class Diagram
-![class diagram](class diagram.png)
+![class diagram](class_diagram.jpg)
