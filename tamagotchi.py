@@ -1,6 +1,8 @@
-
-
 class Tamagotchi:
+    """
+    Management of the Tamagotchi entity
+    """
+    
     def __init__(self, name: str, health: int = 200, boredom: int = 200, tiredness: int = 200, hunger: int = 200) -> None:
         self.name: str = name
         self.health: int = health
@@ -9,30 +11,38 @@ class Tamagotchi:
         self.hunger: int = hunger
 
     # getter
-    def getHealth(self) -> int:
+    @property
+    def health(self) -> int:
         return self.health
     
-    def getTiredness(self) -> int:
+    @property
+    def tiredness(self) -> int:
         return self.tiredness
     
-    def getBoredom(self) -> int:
+    @property
+    def boredom(self) -> int:
         return self.boredom
     
-    def getHunger(self) -> int:
+    @property
+    def hunger(self) -> int:
         return self.hunger
     
     # setter
-    def setHealth(self, number: int) -> None:
-        self.health += number
+    @health.setter
+    def health(self, value: int) -> None:
+        self.health = value
     
-    def setTiredness(self, number: int) -> None:
-        self.tiredness += number
+    @tiredness.setter
+    def tiredness(self, value: int) -> None:
+        self.tiredness = value
     
-    def setBoredom(self, number: int) -> None:
-        self.boredom += number
+    @boredom.setter
+    def boredom(self, value: int) -> None:
+        self.boredom = value
     
-    def setHunger(self, number: int) -> None:
-        self.hunger += number
+    @hunger.setter
+    def hunger(self, value: int) -> None:
+        self.hunger = value
 
     # methods
     def play(self) -> None:
@@ -41,4 +51,4 @@ class Tamagotchi:
 
     def feed(self, player: Player) -> None:
         self.hunger += 50
-        player.setBiscuit(player.getBiscuit() - 1)
+        player.biscuit(player.biscuit() - 1)
