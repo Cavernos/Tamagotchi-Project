@@ -63,7 +63,5 @@ class Tamagotchi:
 
     def feed(self, player: Player) -> None:
         self.hunger = self.hunger - 50
-        if player.biscuit > 0:
-            player.biscuit = player.biscuit - 1
-        else:
-            print("Vous n'avez plus de croquettes")
+        player.biscuit = player.biscuit - 1
+
