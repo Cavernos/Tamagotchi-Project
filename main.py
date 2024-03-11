@@ -3,6 +3,16 @@ import inspect
 from Game import Game
 from Player import Player
 from Tamagotchi import Tamagotchi
+import threading
+
+
+class Thread(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+
+    def run(self):
+        game.day()
+
 
 player = Player("Ten", 2)
 tamagotchi = Tamagotchi("Michel")
@@ -28,4 +38,5 @@ def main():
 
 
 game = Game()
-game.is_day()
+m = Thread()
+m.start()
