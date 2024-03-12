@@ -1,9 +1,16 @@
 import unittest
+from Player import Player
 
 
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)  # add assertion here
+class TestPlayer(unittest.TestCase):
+    def setUp(self) -> None:
+        self.player = Player(name="PLayer", biscuit=50)
+    
+    def test_is_instance_of_player(self):
+        self.assertIsInstance(self.player, Player)
+
+    def test_biscuit_is_greater_than_zero(self):
+        self.assertGreater(self.player.biscuit, 0)
 
 
 if __name__ == '__main__':
