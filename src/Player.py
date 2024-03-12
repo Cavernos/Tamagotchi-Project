@@ -10,7 +10,8 @@ class Player:
     biscuit : int
         The number of biscuit in player inventory
     """
-    def __init__(self, name="PLayer", biscuit=50) -> None:
+
+    def __init__(self, name: str = "PLayer", biscuit: int = 50) -> None:
         """
         Parameters
         ----------
@@ -49,3 +50,6 @@ class Player:
         Name Setter
         """
         self._name = value
+
+    def give_biscuit(self):
+        self.biscuit = self.biscuit - 1
