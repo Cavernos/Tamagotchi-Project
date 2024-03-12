@@ -101,10 +101,10 @@ class Tamagotchi:
 
     # methods
     def play(self) -> None:
-        self.boredom = self.boredom + 50
-        self.tiredness = self.tiredness - 50
+        self.boredom += 50
+        self.tiredness -= 50
 
     def feed(self, player: Player) -> None:
-        self.hunger = self.hunger - 50
+        self.hunger -= 50
         player.give_biscuit()
 
