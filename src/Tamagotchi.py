@@ -3,6 +3,7 @@ from Player import Player
 
 class Tamagotchi:
     """
+    Dev : Nicolas Clement
     A classed used to represent a Tamagotchi
     ...
 
@@ -46,7 +47,7 @@ class Tamagotchi:
         self._boredom: int = boredom
         self._hunger: int = hunger
 
-    # Getter
+    # Getters
     @property
     def name(self) -> str:
         """
@@ -82,34 +83,34 @@ class Tamagotchi:
         """
         return self._hunger
     
-    # Setter
+    # Setters
     @health.setter
     def health(self, value: int) -> None:
         """
         Health Setter
         """
-        self.health = value
+        self._health = value
 
     @tiredness.setter
     def tiredness(self, value: int) -> None:
         """
         Tiredness Setter
         """
-        self.tiredness = value
+        self._tiredness = value
 
     @boredom.setter
     def boredom(self, value: int) -> None:
         """
         Boredom Setter
         """
-        self.boredom = value
+        self._boredom = value
 
     @hunger.setter
     def hunger(self, value: int) -> None:
         """
         Hunger Setter
         """
-        self.hunger = value
+        self._hunger = value
 
     # Methods
     def play(self) -> None:

@@ -55,4 +55,4 @@ class Player:
         """
         The Player feed the Tamagotchi
         """
-        self.biscuit -= 1
+        self._biscuit -= 1
