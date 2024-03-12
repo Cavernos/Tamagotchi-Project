@@ -28,4 +28,4 @@ pytest
 - site web
 
 # Class Diagram
-![class diagram](class_diagram.jpg)
+![class diagram](class_diagram.png)
