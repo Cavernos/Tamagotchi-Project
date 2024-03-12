@@ -18,7 +18,5 @@ class TestPlayer(unittest.TestCase):
         tamagotchi.feed(self.player)
 
 
-
-
 if __name__ == '__main__':
     unittest.main()

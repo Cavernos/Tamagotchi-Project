@@ -49,3 +49,10 @@ class Player:
         Name Setter
         """
         self._name = value
+
+    # Methods
+    def give_biscuit(self):
+        """
+        The Player feed the Tamagotchi
+        """
+        self.biscuit -= 1
