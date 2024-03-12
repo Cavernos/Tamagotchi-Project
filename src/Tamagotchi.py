@@ -20,7 +20,7 @@ class Tamagotchi:
         The number of hunger point
     """
     def __init__(self,
-                 name: str,
+                 name: str = "Tamagotchi",
                  health: int = 200,
                  boredom: int = 200,
                  tiredness: int = 200,
@@ -106,19 +106,5 @@ class Tamagotchi:
 
     def feed(self, player: Player) -> None:
         self.hunger = self.hunger - 50
-
-    # methods
-    def play(self) -> None:
-        """
-        Play with the Tamagotchi
-        """
-        self.boredom += 50
-        self.tiredness -= 50
-
-    def feed(self, player: Player) -> None:
-        """
-        Feed the Tamagotchi
-        """
-        self.hunger += 50
-        player.biscuit = player.biscuit - 1
+        player.give_biscuit()
 
