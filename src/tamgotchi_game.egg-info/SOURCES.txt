@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/Game.py
+src/Player.py
+src/Tamagotchi.py
+src/main.py
+src/tamgotchi_game.egg-info/PKG-INFO
+src/tamgotchi_game.egg-info/SOURCES.txt
+src/tamgotchi_game.egg-info/dependency_links.txt
+src/tamgotchi_game.egg-info/requires.txt
+src/tamgotchi_game.egg-info/top_level.txt
+tests/TestPlayer.py
