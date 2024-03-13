@@ -126,3 +126,13 @@ class Tamagotchi:
         """
         self.hunger += 50
         player.give_biscuit()
+
+    def __str__(self) -> str:
+        return f"\n{self.name}\nHealth : {self.health}\nHunger : {self.hunger}\nBoredom : {self.boredom}\nTiredness : {self.tiredness}"
+
+
+if __name__ == '__main__':
+    player = Player("Master")
+    tamagotchi = Tamagotchi(name="Slave")
+    tamagotchi.feed(player)
+    print(tamagotchi)
