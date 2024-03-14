@@ -16,7 +16,15 @@ python -m venv venv
 ```cmd
 python -m pip install -e .
 ```
-## 4 - Run Unit Tests
+## 4 - Install dev dependencies 
+```cmd
+python -m pip install -e .[dev]
+```
+## 5 - Install test dependencies 
+```cmd
+python -m pip install -e .[test]
+```
+## 5 - Run Unit Tests
 ```cmd
 pytest
 ```

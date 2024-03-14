@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tamgotchi-game"
 version = "0.1"
-dependencies=[]
+dependencies=["keyboard"]
 requires-python = ">= 3.12"
 description = "Tamagotchi game is Isep's student coding project, it consist to play with 5 tamagotchi and not kill them."
 authors = [
@@ -27,8 +27,8 @@ dev = [
 ]
 test = ["pytest>=8.1.1"]
 
-[tool.setuptools.packages.find]
-where = ["src", "tests"]
+[tool.setuptools]
+package-dir = {"" = "src"}
 
 [tool.pytest.ini_options]
 minversion = "8.1.1"
