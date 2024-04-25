@@ -1,5 +1,7 @@
 import random
+NUMBER_OF_TAMAGOTCHI = 5
 tamagotchi = {"name": "Michel","hunger": 200, "health": 200, "boredom": 200, "thirsty": 200, "tireness": 200, "dead": False, "sleep": False, "in_battle": False, "night_duration": random.randint(30 ,60)}
+tamagotchis = [tamagotchi for i in range(NUMBER_OF_TAMAGOTCHI)]
 
 def eat(tamagotchi :dict) -> None:
     tamagotchi["hunger"] += 50
@@ -26,6 +28,9 @@ def is_in_battle(tamagotchis: list[dict]):
         if tamagotchi["in_battle"]:
             tamagotchis["health"] -= 5
         tamagotchi["in_battle"] = False
+
+def night_duration(tamagotchi : dict):
+    tamagotchi["night_duration"] = random.randint(30, 60)
 
 def sleep_zzz(tamagotchi :dict):
     tamagotchi["health"] += 1
