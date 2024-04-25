@@ -1,3 +1,6 @@
+import tamagotchi
+
+
 #--------------- Player ---------------#
 
 class Player:
@@ -61,17 +64,17 @@ class Player:
     # Methods
     def give_biscuit(self) -> None:
         """
-        The Player feed the Tamagotchi
+        The Player feed the tamagotchi
         """
         self._biscuits -= 1
-        eat()
+        tamagotchi.eat(tamagotchi.tamagotchi)
         return None
 
     def play_with(self) -> None:
         """
-        The Player feed the Tamagotchi
+        The Player play with the tamagotchi
         """
-        play()
+        tamagotchi.play(tamagotchi.tamagotchi)
         return None
 
 #--------------- Test ---------------#
