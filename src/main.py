@@ -1,5 +1,5 @@
 import keyboard
-from Game import Game
+from Console import Game
 from Player import Player
 from Tamagotchi import Tamagotchi
 
