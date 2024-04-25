@@ -60,19 +60,19 @@ class Player:
         return
 
     # Methods
-    def give_biscuit(self) -> None:
+    def give_biscuit(self, tam) -> None:
         """
         The Player feed the tamagotchi
         """
         self.biscuits =  self.biscuits - 1
-        tamagotchi.eat(tamagotchi.tamagotchi)
+        tamagotchi.eat(tam)
         return
 
-    def play_with(self, tamagotchi.tamagotchis, ) -> None:
+    def play_with(self, tam) -> None:
         """
         The Player play with the tamagotchi
         """
-        tamagotchi.play(tamagotchi.tamagotchi)
+        tamagotchi.play(tam)
         return
 
 
