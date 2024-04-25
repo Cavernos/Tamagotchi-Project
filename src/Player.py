@@ -1,6 +1,5 @@
 import tamagotchi
 
-
 #--------------- Player ---------------#
 
 class Player:
@@ -16,7 +15,7 @@ class Player:
         The number of biscuit in player inventory
     """
 
-    def __init___(self,
+    def __init__(self,
                   name: str= "Player",
                   biscuits: int= 50) -> None:
         """
@@ -27,9 +26,9 @@ class Player:
         biscuits : int
             The number of biscuit got by the Player
         """
-        self.name: str = name
-        self.biscuits: int = biscuits
-        return None
+        self._name: str = name
+        self._biscuits: int = biscuits
+        return
 
     @property
     def biscuits(self) -> int:
@@ -44,7 +43,6 @@ class Player:
         Biscuit Setter
         """
         self._biscuits = value
-        return None
 
     @property
     def name(self) -> str:
@@ -59,23 +57,24 @@ class Player:
         Name Setter
         """
         self._name = value
-        return None
+        return
 
     # Methods
     def give_biscuit(self) -> None:
         """
         The Player feed the tamagotchi
         """
-        self._biscuits -= 1
+        self.biscuits =  self.biscuits - 1
         tamagotchi.eat(tamagotchi.tamagotchi)
-        return None
+        return
 
-    def play_with(self) -> None:
+    def play_with(self, tamagotchi.tamagotchis, ) -> None:
         """
         The Player play with the tamagotchi
         """
         tamagotchi.play(tamagotchi.tamagotchi)
-        return None
+        return
+
 
 #--------------- Test ---------------#
 
