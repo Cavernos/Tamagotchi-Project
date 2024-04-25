@@ -1,110 +1,37 @@
-from Player import Player
+import random
+tamagotchi = {"faim": 200, "santé": 200, "ennui": 200, "soif": 200, "fatigue": 200, "dead": False, "sleep": False, "in_battle": False, "night_duration": random.randint(30 ,60)}
+
+def eat(tamagotchi :dict) -> None:
+    tamagotchi["faim"] += 50
+
+def drink(tamagotchi :dict):
+    tamagotchi["soif"] += 50
+
+def play(tamagotchi :dict):
+    tamagotchi["ennui"] += 50
+    tamagotchi["fatigue"] -= 50
+
+def die(tamagotchi :dict):
+    if tamagotchi["santé"] <= 0:
+        tamagotchi["dead"] = True
+    tamagotchi["dead"] = False
+
+def battle(tamagotchi: dict):
+    if tamagotchi["ennui"] <= 0:
+        tamagotchi["in_battle"] = True
 
 
-class Tamagotchi:
-    """
-    A classed used to represent a Tamagotchi
-    ...
+def is_in_battle(tamagotchis: list[dict]):
+    for tamagotchi in tamagotchis:
+        if tamagotchi["in_battle"]:
+            tamagotchis["santé"] -= 5
+        tamagotchi["in_battle"] = False
 
-    Attributes
-    ----------
-    name : str
-        The name of the Tamagotchi
-    health : int
-        The number of health point
-    boredom : int
-        The number of boredom point
-    tiredness : int
-        The number of tiredness point
-    hunger : int
-        The number of hunger point
-    """
-    def __init__(self,
-                 name: str = "Tamagotchi",
-                 health: int = 200,
-                 boredom: int = 200,
-                 tiredness: int = 200,
-                 hunger: int = 200
-                 ) -> None:
-        """
-        Parameters
-        ----------
-        name : str
-            The name of the Tamagotchi
-        health : int
-            The number of health point
-        boredom : int
-            The number of boredom point
-        tiredness : int
-            The number of tiredness point
-        hunger : int
-            The number of hunger point
-        """
-        self._name: str = name
-        self._health: int = health
-        self._tiredness: int = tiredness
-        self._boredom: int = boredom
-        self._hunger: int = hunger
+def sleep_zzz(tamagotchi :dict):
+    tamagotchi["santé"] += 1
+    tamagotchi["fatigue"] += 1
+    tamagotchi["ennui"] += 1
 
-    # getter
-    @property
-    def name(self) -> str:
-        """
-        Name Property equivalent of getter
-        """
-        return self._name
-    
-    @property
-    def health(self) -> int:
-        """
-        Health Property equivalent of getter
-        """
-        return self._health
-
-    @property
-    def tiredness(self)-> int:
-        """
-        Tiredness Property equivalent of getter
-        """
-        return self._tiredness
-
-    @property
-    def boredom(self) -> int:
-        """
-        Boredum Property equivalent of getter
-        """
-        return self._boredom
-
-    @property
-    def hunger(self) -> int:
-        """
-        Hunger Property equivalent of getter
-        """
-        return self._hunger
-    
-    # setter
-    @health.setter
-    def health(self, value: int) -> None:
-        self._health = value
-
-    @tiredness.setter
-    def tiredness(self, value: int) -> None:
-        self._tiredness = value
-
-    @boredom.setter
-    def boredom(self, value: int) -> None:
-        self._boredom = value
-
-    @hunger.setter
-    def hunger(self, value: int) -> None:
-        self._hunger = value
-
-    # methods
-    def play(self) -> None:
-        self.boredom += 50
-        self.tiredness -= 50
-
-    def feed(self, player: Player) -> None:
-        self.hunger -= 50
-        player.give_biscuit()
-
+def awake(tamagotchi :dict):
+    tamagotchi["ennui"] -= 3
+    tamagotchi["faim"] -= 5
