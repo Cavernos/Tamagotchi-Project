@@ -1,8 +1,8 @@
 import threading
 import tamagotchi
-from Player import Player
+from config import DAY_DURATION
 import time
-DAY_DURATION = 10
+
 
 class Clock(threading.Thread):
     def __init__(self, name) -> None:

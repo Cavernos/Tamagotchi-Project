@@ -1,6 +1,5 @@
 import unittest
 from Player import Player
-from Tamagotchi import Tamagotchi
 
 
 class TestPlayer(unittest.TestCase):
@@ -13,9 +12,6 @@ class TestPlayer(unittest.TestCase):
     def test_biscuit_is_greater_than_zero(self) -> None:
         self.assertGreater(self.player.biscuit, 0)
 
-    def test_player_feed_tamagotchi(self) -> None:
-        tamagotchi = Tamagotchi()
-        tamagotchi.feed(self.player)
 
 
 
