@@ -1,9 +1,23 @@
 import random
 from config import NUMBER_OF_TAMAGOTCHI, NOT_PRINTABLE_KEYS
 
-tamagotchi = {"name": "Michel", "hunger": 200, "health": 200, "boredom": 200, "thirsty": 200, "tireness": 200,
-              "dead": False, "sleep": False, "in_battle": False, "night_duration": random.randint(30, 60)}
-tamagotchis = [tamagotchi for i in range(NUMBER_OF_TAMAGOTCHI)]
+# {"name": "Michel", "hunger": 200, "health": 200, "boredom": 200, "thirsty": 200, "tireness": 200,
+#             "dead": False, "sleep": False, "in_battle": False, "night_duration": random.randint(30, 60)}
+tamagotchis = [
+    {
+        "name": "Michel",
+        "hunger": 200,
+        "health": 200,
+        "boredom": 200,
+        "thirsty": 200,
+        "tireness": 200,
+        "dead": False,
+        "sleep": False,
+        "in_battle": False,
+        "night_duration": random.randint(30, 60)
+    }
+    for i in range(NUMBER_OF_TAMAGOTCHI)
+]
 
 
 def eat(tamagotchi: dict) -> None:
@@ -28,13 +42,13 @@ def die(tamagotchi: dict):
 def battle(tamagotchi: dict):
     if tamagotchi["boredom"] <= 0:
         tamagotchi["in_battle"] = True
+    tamagotchi["in_battle"] = False
 
 
 def is_in_battle(tamagotchis: list[dict]):
-    for tamagotchi in tamagotchis:
-        if tamagotchi["in_battle"]:
-            tamagotchis["health"] -= 5
-        tamagotchi["in_battle"] = False
+    for element in tamagotchis:
+        if element["in_battle"]:
+            tamagotchis[tamagotchis.index(element)]["health"] -= 5
 
 
 def night_duration(tamagotchi: dict):
@@ -53,23 +67,20 @@ def awake(tamagotchi: dict):
 
 
 def get_status() -> list:
-    tamagotchis_status = [[] for i in range(len(tamagotchi.keys()) - NOT_PRINTABLE_KEYS)]
-    for i in range(len(tamagotchi.keys()) - NOT_PRINTABLE_KEYS):
-        tamagotchis_status[i].insert(0,  list(tamagotchi)[i].capitalize())
+    tamagotchis_status = [[] for i in range(len(tamagotchis[0].keys()) - NOT_PRINTABLE_KEYS)]
+    for i in range(len(tamagotchis[0].keys()) - NOT_PRINTABLE_KEYS):
+        tamagotchis_status[i].insert(0, list(tamagotchis[0])[i].capitalize())
     for i in range(len(tamagotchis)):
-        for j in range(len(tamagotchi.keys()) - NOT_PRINTABLE_KEYS):
+        for j in range(len(tamagotchis[0].keys()) - NOT_PRINTABLE_KEYS):
             tamagotchis_status[j].append(tamagotchis[i][list(tamagotchis[i])[j]])
     return tamagotchis_status
-    #return [f"\t\t{tamagotchi["name"]}\t",
-    #       f"Santé\t\t  {tamagotchi["health"]}\t",
-    #       f"Faim\t\t  {tamagotchi["hunger"]}\t",
-    #       f"Ennui\t\t  {tamagotchi["boredom"]}\t",
-    #       f"Fatigue\t\t  {tamagotchi["tireness"]}\t"]
 
 
 def print_status() -> None:
     tamagotchis_status = get_status()
-    for i in range(len(tamagotchis)):
-        print("\t")
-        for j in range(len(tamagotchi.keys()) - NOT_PRINTABLE_KEYS):
-            print(tamagotchis_status[i][j], end="\t\t")
+    for i in range(len(tamagotchis[0].keys()) - NOT_PRINTABLE_KEYS):
+        print("")
+        for j in range(len(tamagotchis) + 1):
+            print(format(str(tamagotchis_status[i][j]), "<15"), end="")
+
+print_status()
