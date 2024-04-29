@@ -38,7 +38,6 @@ def die(tamagotchi: dict):
         tamagotchi["dead"] = True
     tamagotchi["dead"] = False
 
-
 def battle(tamagotchi: dict):
     if tamagotchi["boredom"] <= 0:
         tamagotchi["in_battle"] = True
@@ -82,5 +81,3 @@ def print_status() -> None:
         print("")
         for j in range(len(tamagotchis) + 1):
             print(format(str(tamagotchis_status[i][j]), "<15"), end="")
-
-print_status()

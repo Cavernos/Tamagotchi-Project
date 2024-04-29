@@ -9,6 +9,7 @@ class Clock(threading.Thread):
         threading.Thread.__init__(self, name=name)
         self.day_duration = DAY_DURATION
         self.tamagotchis = tamagotchi.tamagotchis
+        self.game_time = [0, 0]
 
     def run(self) -> None:
         while self.day_duration:
@@ -21,7 +22,28 @@ class Clock(threading.Thread):
                     tamagotchi.sleep_zzz(element)
                 else:
                     tamagotchi.awake(element)
+            self.calc_game_time()
             time.sleep(1)
             self.day_duration -= 1
         for element in self.tamagotchis:
             tamagotchi.night_duration(element)
+
+    def calc_game_time(self):
+        self.game_time[1] += 8
+        if self.game_time[1] >= 60:
+            self.game_time[0] += 1
+            self.game_time[1]  = self.game_time[1] % 60
+        if self.game_time[0] >= 24:
+            self.game_time[0] = 0
+
+    def print_time(self):
+        print(f"{"0" if self.game_time[0] <= 10 else ""}{self.game_time[0]}:{"0" if self.game_time[1] <= 10 else ""}{self.game_time[1]}")
+
+
+clock = Clock()
+clock.start()
+duration = DAY_DURATION
+while duration:
+    clock.print_time()
+    time.sleep(1)
+    duration -= 1
