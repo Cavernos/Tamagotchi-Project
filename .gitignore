@@ -2,3 +2,5 @@
 __pycache__
 venv
 src/tamgotchi_game.egg-info
+src/jeu.py
+commentaires.txt
