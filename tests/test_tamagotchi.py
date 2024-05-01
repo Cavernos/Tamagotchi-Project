@@ -158,10 +158,10 @@ class TestTamagotchi(unittest.TestCase):
             ['Thirsty'] + tamagotchis_thirsty,
             ['Tireness'] + tamagotchis_tireness
         ]
-        self.assertEqual(tamagotchi.get_status(), result)
+        self.assertEqual(tamagotchi.get_status(self.tamagotchis), result)
 
     def test_print_status(self) -> None:
-        self.assertIsNone(tamagotchi.print_status())
+        self.assertIsNone(tamagotchi.print_status(tamagotchi.get_status(self.tamagotchis)))
 
 
 if __name__ == '__main__':

@@ -38,12 +38,3 @@ class Clock(threading.Thread):
 
     def print_time(self):
         print(f"{"0" if self.game_time[0] < 10 else ""}{self.game_time[0]}:{"0" if self.game_time[1] < 10 else ""}{self.game_time[1]}")
-
-
-clock = Clock()
-clock.start()
-duration = DAY_DURATION
-while duration:
-    clock.print_time()
-    time.sleep(1)
-    duration -= 1
