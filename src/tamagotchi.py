@@ -13,9 +13,6 @@ tamagotchis = [
         "boredom": CARACTERISTICS_INITIAL_VALUE,
         "thirsty": CARACTERISTICS_INITIAL_VALUE,
         "tireness": CARACTERISTICS_INITIAL_VALUE,
-        "dead": False,
-        "sleep": False,
-        "in_battle": False,
         "night_duration": random.randint(30, 60)
     }
     for i in range(NUMBER_OF_TAMAGOTCHI)
@@ -30,7 +27,7 @@ def eat(tamagotchi: dict) -> None:
     tamagotchi : dict
         One tamagotchi
     """
-    tamagotchi["hunger"] += 50
+    tamagotchi["hunger"] += 50 if tamagotchi["hunger"] <= CARACTERISTICS_INITIAL_VALUE else 0
 
 
 def drink(tamagotchi: dict):
@@ -41,7 +38,7 @@ def drink(tamagotchi: dict):
         tamagotchi : dict
             One tamagotchi
     """
-    tamagotchi["thirsty"] += 50
+    tamagotchi["thirsty"] += 50 if tamagotchi["thirsty"] <= CARACTERISTICS_INITIAL_VALUE else 0
 
 
 def play(tamagotchi: dict):
@@ -52,8 +49,11 @@ def play(tamagotchi: dict):
         tamagotchi : dict
             One tamagotchi
     """
-    tamagotchi["boredom"] += 50
-    tamagotchi["tireness"] -= 50
+    tamagotchi["boredom"] += 50 if tamagotchi["boredom"] <= CARACTERISTICS_INITIAL_VALUE else 0
+    if tamagotchi["tireness"] >= 0:
+        tamagotchi["tireness"] -= 50
+    else:
+        tamagotchi["health"] -= 1
 
 
 def die(tamagotchi: dict):
@@ -64,7 +64,7 @@ def die(tamagotchi: dict):
         tamagotchi : dict
             One tamagotchi
     """
-    tamagotchi["dead"] = True if tamagotchi["health"] <= 0 else False
+    return True if tamagotchi["health"] <= 0 else False
 
 
 def battle(tamagotchi: dict):
@@ -75,7 +75,7 @@ def battle(tamagotchi: dict):
         tamagotchi : dict
             One tamagotchi
     """
-    tamagotchi["in_battle"] = True if tamagotchi["boredom"] <= 0 else False
+    return True if tamagotchi["boredom"] <= 0 else False
 
 
 def is_in_battle(tamagotchis: list[dict]) -> None:
@@ -87,7 +87,7 @@ def is_in_battle(tamagotchis: list[dict]) -> None:
             All tamagotchis
     """
     for element in tamagotchis:
-        if element["in_battle"]:
+        if battle(element):
             for e in tamagotchis:
                 e["health"] -= 5
 
@@ -111,9 +111,10 @@ def sleep_zzz(tamagotchi: dict) -> None:
         tamagotchi : dict
             One tamagotchi
     """
-    tamagotchi["health"] += 1
-    tamagotchi["tireness"] += 1
-    tamagotchi["boredom"] += 1
+    if tamagotchi["health"] or tamagotchi["tireness"] or tamagotchi["boredom"] <= CARACTERISTICS_INITIAL_VALUE:
+        tamagotchi["health"] += 1
+        tamagotchi["tireness"] += 1
+        tamagotchi["boredom"] += 1
 
 
 def awake(tamagotchi: dict) -> None:

@@ -1,3 +1,5 @@
+# dev Cavernos
+
 import random
 import unittest
 import tamagotchi
@@ -66,12 +68,10 @@ class TestTamagotchi(unittest.TestCase):
         Test of die tamagotchi's function
         """
         test_tamagotchi = {
-            "health": CARACTERISTICS_INITIAL_VALUE,
-            "dead": False,
+            "health": CARACTERISTICS_INITIAL_VALUE
         }
         test_tamagotchi['health'] -= (CARACTERISTICS_INITIAL_VALUE + 1)
-        tamagotchi.die(test_tamagotchi)
-        self.assertTrue(test_tamagotchi['dead'])
+        self.assertTrue(tamagotchi.die(test_tamagotchi))
 
     def test_battle(self) -> None:
         """
@@ -79,11 +79,9 @@ class TestTamagotchi(unittest.TestCase):
         """
         test_tamagotchi = {
             "boredom": CARACTERISTICS_INITIAL_VALUE,
-            "in_battle": False,
         }
         test_tamagotchi['boredom'] -= (CARACTERISTICS_INITIAL_VALUE + 1)
-        tamagotchi.battle(test_tamagotchi)
-        self.assertTrue(test_tamagotchi['in_battle'])
+        self.assertTrue(tamagotchi.battle(test_tamagotchi))
 
     def test_is_in_battle(self):
         """
@@ -92,12 +90,11 @@ class TestTamagotchi(unittest.TestCase):
         test_tamagotchis = [
             {
                 "health": CARACTERISTICS_INITIAL_VALUE,
-                "boredom": 0,
-                "in_battle": False,
+                "boredom": CARACTERISTICS_INITIAL_VALUE,
             }
             for i in range(5)
         ]
-        tamagotchi.battle(test_tamagotchis[0])
+        test_tamagotchis[0]['boredom'] = 0
         tamagotchi.is_in_battle(test_tamagotchis)
         assert_result = [195 for i in range(5)]
         result = [test_tamagotchis[i]['health'] for i in range(5)]
