@@ -1,5 +1,7 @@
 # dev Cavernos
-class Player:
+
+
+class Player():
     """
     A classed used to represent a Player
     ...
@@ -51,6 +53,10 @@ class Player:
         Name Setter
         """
         self._name = value
+
+    @property
+    def instance(self):
+        return self
 
     def give_biscuit(self):
         self.biscuit = self.biscuit - 1

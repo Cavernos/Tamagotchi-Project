@@ -33,19 +33,21 @@ class Clock(threading.Thread):
         self.day_duration = DAY_DURATION
         self.tamagotchis = tamagotchi.tamagotchis
         self.statement = ""
+        self.running = False
         self.game_time = [0, 0]
 
     def run(self) -> None:
         """
         Run method (principal thread function) verify condition and execute tamagotch's method
         """
+        self.running = True
         while self.day_duration:
             for element in self.tamagotchis:
                 if tamagotchi.battle(element):
                     tamagotchi.is_in_battle(self.tamagotchis)
                 if tamagotchi.die(element):
                     self.statement = "Le tamagotchi est mort"
-                    print("le tamagotchi est mort")  # TODO Replace with option
+                    print("le tamagotchi est mort") # TODO Replace with option
                     return
                 if self.day_duration <= element["night_duration"]:
                     tamagotchi.sleep_zzz(element)
