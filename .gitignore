@@ -1,4 +1,11 @@
 .idea
 __pycache__
+<<<<<<< HEAD
 .mypy_cache
 .venv
+=======
+venv
+src/tamgotchi_game.egg-info
+src/jeu.py
+commentaires.txt
+>>>>>>> origin/dev

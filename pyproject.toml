@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tamgotchi-game"
 version = "0.1"
-dependencies=["pytest>=8.1.1"]
+dependencies=["keyboard", "pygame"]
 requires-python = ">= 3.12"
 description = "Tamagotchi game is Isep's student coding project, it consist to play with 5 tamagotchi and not kill them."
 authors = [
@@ -19,4 +19,23 @@ license = {file = "LICENSE"}
 
 [project.urls]
 Repository = "https://github.com/Cavernos/Tamagotchi-Project.git"
+
+[project.optional-dependencies]
+dev = [
+"pylint >=2.14.0",
+    "toml >= 0.10.2"
+]
+test = ["pytest>=8.1.1"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.pytest.ini_options]
+minversion = "8.1.1"
+addopts = "-ra -q"
+testpaths = [
+"tests"
+]
+
+
 

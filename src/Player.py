@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 import tamagotchi
 
 #--------------- Player ---------------#
 
+=======
+# dev Cavernos
+>>>>>>> origin/dev
 class Player:
     """
     A classed used to represent a Player
@@ -11,38 +15,35 @@ class Player:
     ----------
     name : str
         the name of the Player
-    biscuits : int
+    biscuit : int
         The number of biscuit in player inventory
     """
 
-    def __init__(self,
-                  name: str= "Player",
-                  biscuits: int= 50) -> None:
+    def __init__(self, name: str = "PLayer", biscuit: int = 50) -> None:
         """
         Parameters
         ----------
         name : str
             The name of the Player
-        biscuits : int
+        biscuit : int
             The number of biscuit got by the Player
         """
         self._name: str = name
-        self._biscuits: int = biscuits
-        return
+        self._biscuit: int = biscuit
 
     @property
-    def biscuits(self) -> int:
+    def biscuit(self) -> int:
         """
         Biscuit Property equivalent of getter
         """
-        return self._biscuits
+        return self._biscuit
 
-    @biscuits.setter
-    def biscuits(self, value) -> None:
+    @biscuit.setter
+    def biscuit(self, value) -> None:
         """
         Biscuit Setter
         """
-        self._biscuits = value
+        self._biscuit = value
 
     @property
     def name(self) -> str:
@@ -57,6 +58,7 @@ class Player:
         Name Setter
         """
         self._name = value
+<<<<<<< HEAD
         return
 
     # Methods
@@ -80,3 +82,8 @@ class Player:
 
 if __name__ == "__main__":
     ...
+=======
+
+    def give_biscuit(self):
+        self.biscuit = self.biscuit - 1
+>>>>>>> origin/dev
