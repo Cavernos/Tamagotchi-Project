@@ -6,7 +6,7 @@ import tamagotchi
 
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+window = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 in_game = True
 
@@ -18,9 +18,18 @@ while in_game:
             in_game = False
 
     # fill the screen with a color to wipe away anything from last frame
-    screen.fill("gray")
+    window.fill("gray")
 
     # RENDER YOUR GAME HERE
+    my_font = pygame.font.SysFont('Comic Sans MS', 30)
+    
+    text = my_font.render('TamaGOATchi', True, "black")
+    
+    textRect = text.get_rect()
+    textRect.center = (window.get_width() // 2, window.get_height()//2)
+    
+    window.blit(text, textRect)
+
 
     # flip() the display to put your work on screen
     pygame.display.flip()
