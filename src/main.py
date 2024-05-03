@@ -1,7 +1,7 @@
 from optparse import OptionParser
 
 import keyboard
-from Player import Player
+from player00 import Player
 
 
 class Main:
