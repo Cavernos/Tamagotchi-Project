@@ -1,9 +1,10 @@
 # dev Cavernos
 
+from threading import Event
 import time
 import unittest
 import random
-
+import logging
 from unittest.mock import patch
 from clock import Clock
 from config import NUMBER_OF_TAMAGOTCHI, CARACTERISTICS_INITIAL_VALUE, DAY_DURATION
@@ -12,7 +13,7 @@ from config import NUMBER_OF_TAMAGOTCHI, CARACTERISTICS_INITIAL_VALUE, DAY_DURAT
 class TestClock(unittest.TestCase):
 
     def setUp(self):
-        self.clock = Clock("test_clock")
+        self.clock = Clock("test_clock", Event())
 
     @patch("time.sleep", return_value=None)
     def test_clock_time(self, patched_time_sleep) -> None:
@@ -34,10 +35,10 @@ class TestClock(unittest.TestCase):
             {
                 "name": "Michel",
                 "hunger": CARACTERISTICS_INITIAL_VALUE,
-                "health": CARACTERISTICS_INITIAL_VALUE,
-                "boredom": CARACTERISTICS_INITIAL_VALUE,
+                "health": CARACTERISTICS_INITIAL_VALUE - 2,
+                "boredom": CARACTERISTICS_INITIAL_VALUE -2,
                 "thirsty": CARACTERISTICS_INITIAL_VALUE,
-                "tireness": CARACTERISTICS_INITIAL_VALUE,
+                "tireness": CARACTERISTICS_INITIAL_VALUE -2,
                 "sleep": False,
                 "night_duration": random.randint(30, 60)
             }
@@ -52,7 +53,7 @@ class TestClock(unittest.TestCase):
             [tamagotchis[i]["tireness"] for i in range(len(tamagotchis))]
         ]
         self.assertEqual(result, [
-            [CARACTERISTICS_INITIAL_VALUE + 2 for i in range(len(tamagotchis))] for i in range(3)
+            [CARACTERISTICS_INITIAL_VALUE for i in range(len(tamagotchis))] for i in range(3)
         ]
                          )
         self.clock.join()

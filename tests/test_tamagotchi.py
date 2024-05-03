@@ -2,13 +2,13 @@
 
 import random
 import unittest
-import tamagotchi
+import tamagotchi_file
 from config import CARACTERISTICS_INITIAL_VALUE
 
 
 class TestTamagotchi(unittest.TestCase):
     def setUp(self) -> None:
-        self.tamagotchis = tamagotchi.tamagotchis
+        self.tamagotchis = tamagotchi_file.tamagotchis
 
     def test_tamagotchi_dictionary(self) -> None:
         """
@@ -36,31 +36,31 @@ class TestTamagotchi(unittest.TestCase):
         Test of eat tamagotchi's function
         """
         test_tamagotchi = {
-            "hunger": CARACTERISTICS_INITIAL_VALUE,
+            "hunger": CARACTERISTICS_INITIAL_VALUE - 50,
         }
-        tamagotchi.eat(test_tamagotchi)
-        self.assertEqual(test_tamagotchi['hunger'], 250)
+        tamagotchi_file.eat(test_tamagotchi)
+        self.assertEqual(test_tamagotchi['hunger'], 200)
 
     def test_drink(self) -> None:
         """
         Test of drink tamagotchi's function
         """
         test_tamagotchi = {
-            "thirsty": CARACTERISTICS_INITIAL_VALUE,
+            "thirsty": CARACTERISTICS_INITIAL_VALUE - 50,
         }
-        tamagotchi.drink(test_tamagotchi)
-        self.assertEqual(test_tamagotchi['thirsty'], 250)
+        tamagotchi_file.drink(test_tamagotchi)
+        self.assertEqual(test_tamagotchi['thirsty'], 200)
 
     def test_play(self) -> None:
         """
         Test of play tamagotchi's function
         """
         test_tamagotchi = {
-            "boredom": CARACTERISTICS_INITIAL_VALUE,
+            "boredom": CARACTERISTICS_INITIAL_VALUE - 50,
             "tireness": CARACTERISTICS_INITIAL_VALUE,
         }
-        tamagotchi.play(test_tamagotchi)
-        self.assertEqual(test_tamagotchi['boredom'], 250)
+        tamagotchi_file.play(test_tamagotchi)
+        self.assertEqual(test_tamagotchi['boredom'], 200)
         self.assertEqual(test_tamagotchi["tireness"], 150)
 
     def test_die(self) -> None:
@@ -71,7 +71,7 @@ class TestTamagotchi(unittest.TestCase):
             "health": CARACTERISTICS_INITIAL_VALUE
         }
         test_tamagotchi['health'] -= (CARACTERISTICS_INITIAL_VALUE + 1)
-        self.assertTrue(tamagotchi.die(test_tamagotchi))
+        self.assertTrue(tamagotchi_file.die(test_tamagotchi))
 
     def test_battle(self) -> None:
         """
@@ -81,7 +81,7 @@ class TestTamagotchi(unittest.TestCase):
             "boredom": CARACTERISTICS_INITIAL_VALUE,
         }
         test_tamagotchi['boredom'] -= (CARACTERISTICS_INITIAL_VALUE + 1)
-        self.assertTrue(tamagotchi.battle(test_tamagotchi))
+        self.assertTrue(tamagotchi_file.battle(test_tamagotchi))
 
     def test_is_in_battle(self):
         """
@@ -95,7 +95,7 @@ class TestTamagotchi(unittest.TestCase):
             for i in range(5)
         ]
         test_tamagotchis[0]['boredom'] = 0
-        tamagotchi.is_in_battle(test_tamagotchis)
+        tamagotchi_file.is_in_battle(test_tamagotchis)
         assert_result = [195 for i in range(5)]
         result = [test_tamagotchis[i]['health'] for i in range(5)]
         self.assertEqual(result, assert_result)
@@ -115,12 +115,12 @@ class TestTamagotchi(unittest.TestCase):
         Test of sleep_zzz tamagotchi's function
         """
         test_tamagotchi = {
-            "health": CARACTERISTICS_INITIAL_VALUE,
-            "tireness": CARACTERISTICS_INITIAL_VALUE,
-            "boredom": CARACTERISTICS_INITIAL_VALUE
+            "health": CARACTERISTICS_INITIAL_VALUE - 1,
+            "tireness": CARACTERISTICS_INITIAL_VALUE - 1,
+            "boredom": CARACTERISTICS_INITIAL_VALUE - 1
         }
-        tamagotchi.sleep_zzz(test_tamagotchi)
-        assertion_result = [201 for i in range(3)]
+        tamagotchi_file.sleep_zzz(test_tamagotchi)
+        assertion_result = [200 for i in range(3)]
         result = [test_tamagotchi["health"], test_tamagotchi["tireness"], test_tamagotchi["boredom"]]
         self.assertEqual(result, assertion_result)
 
@@ -132,7 +132,7 @@ class TestTamagotchi(unittest.TestCase):
             "hunger": CARACTERISTICS_INITIAL_VALUE,
             "boredom": CARACTERISTICS_INITIAL_VALUE
         }
-        tamagotchi.awake(test_tamagotchi)
+        tamagotchi_file.awake(test_tamagotchi)
         assertion_result = [195, 197]
         result = [test_tamagotchi["hunger"], test_tamagotchi["boredom"]]
         self.assertEqual(result, assertion_result)
@@ -155,10 +155,10 @@ class TestTamagotchi(unittest.TestCase):
             ['Thirsty'] + tamagotchis_thirsty,
             ['Tireness'] + tamagotchis_tireness
         ]
-        self.assertEqual(tamagotchi.get_status(self.tamagotchis), result)
+        self.assertEqual(tamagotchi_file.get_status(self.tamagotchis), result)
 
     def test_print_status(self) -> None:
-        self.assertIsNone(tamagotchi.print_status(tamagotchi.get_status(self.tamagotchis)))
+        self.assertIsNone(tamagotchi_file.print_status(tamagotchi_file.get_status(self.tamagotchis)))
 
 
 if __name__ == '__main__':

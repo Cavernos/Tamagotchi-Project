@@ -1,4 +1,5 @@
 # dev Cavernos
+from threading import Event
 from unittest.mock import mock_open, patch
 
 from Player import Player
@@ -36,7 +37,7 @@ class TestGameSaver(unittest.TestCase):
             "sleep": False,
             "night_duration": 32
         }]
-        clock = Clock()
+        clock = Clock("", Event())
         player = Player()
         self.assertEqual(self.saver.save(tamagotchis=tamagotchis, player=player.__dict__, game_time=clock.game_time),
                          json.dumps(
@@ -71,7 +72,7 @@ class TestGameSaver(unittest.TestCase):
             "sleep": False,
             "night_duration": 32
         }]
-        clock = Clock()
+        clock = Clock("", Event())
         player = Player()
         self.saver.save(tamagotchis=tamagotchis, player=player.__dict__, game_time=clock.game_time)
         saver_tamagotchis, saver_clock, saver_player = self.saver.load()
