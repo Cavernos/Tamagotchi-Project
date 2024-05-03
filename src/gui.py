@@ -1,30 +1,24 @@
+# import
 import pygame
-from player
-
-
-p = player.Player()
-p.give_biscuit(player.tamagotchi.tamagotchis[0])
-p.play_with(player.tamagotchi.tamagotchis[0])
-
-
-print(player.tamagotchi.tamagotchis[0])
+import player
+import tamagotchi
 
 
 # pygame setup
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
-running = True
+in_game = True
 
-while running:
+while in_game:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            in_game = False
 
     # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
+    screen.fill("gray")
 
     # RENDER YOUR GAME HERE
 
