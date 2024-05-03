@@ -1,5 +1,6 @@
+import logging
 import threading
-import tamagotchi
+import tamagotchi_file
 from threading import Event
 from config import DAY_DURATION
 import time
@@ -32,7 +33,7 @@ class Clock(threading.Thread):
         """
         threading.Thread.__init__(self, name=name)
         self.day_duration = DAY_DURATION
-        self.tamagotchis = tamagotchi.tamagotchis
+        self.tamagotchis = tamagotchi_file.tamagotchis
         self.statement = ""
         self.event = event
         self.game_time = [0, 0]
@@ -42,24 +43,27 @@ class Clock(threading.Thread):
         Run method (principal thread function) verify condition and execute tamagotch's method
         """
         while self.day_duration:
-            if self.event.set():
+            logging.debug(tamagotchi_file.tamagotchis)
+            if self.event.is_set():
                 return
             for element in self.tamagotchis:
-                if tamagotchi.battle(element):
-                    tamagotchi.is_in_battle(self.tamagotchis)
-                if tamagotchi.die(element):
+                if tamagotchi_file.battle(element):
+                    tamagotchi_file.is_in_battle(self.tamagotchis)
+                if tamagotchi_file.die(element):
                     self.statement = "Le tamagotchi est mort"
-                    print("le tamagotchi est mort") # TODO Replace with option
+                    logging.info("le tamagotchi est mort")
                     return
                 if self.day_duration <= element["night_duration"]:
-                    tamagotchi.sleep_zzz(element)
+                    logging.info(f"C'est la nuit {element["name"]}")
+                    tamagotchi_file.sleep_zzz(element)
                 else:
-                    tamagotchi.awake(element)
-            self.calc_game_time()
+                    logging.info("C'est le Jour")
+                    tamagotchi_file.awake(element)
             time.sleep(1)
+            self.calc_game_time()
             self.day_duration -= 1
         for element in self.tamagotchis:
-            tamagotchi.night_duration(element)
+            tamagotchi_file.night_duration(element)
         self.statement = "Fin de la journée"
 
     def calc_game_time(self):

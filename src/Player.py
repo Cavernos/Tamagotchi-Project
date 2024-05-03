@@ -1,4 +1,5 @@
 # dev Cavernos
+import tamagotchi_file
 
 
 class Player():
@@ -54,9 +55,6 @@ class Player():
         """
         self._name = value
 
-    @property
-    def instance(self):
-        return self
-
-    def give_biscuit(self):
+    def give_biscuit(self,  tamagotchi: dict):
         self.biscuit = self.biscuit - 1
+        tamagotchi_file.eat(tamagotchi)

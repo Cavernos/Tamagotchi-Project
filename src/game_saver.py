@@ -9,7 +9,7 @@ class GameSaver:
         self.file_to_save = Path(file_to_save)
         self.save_data = None
 
-    def save(self, **kwargs: dict | object | list) -> str:
+    def save(self, **kwargs: dict | list) -> str:
         self.save_data = json.dumps(kwargs)
         return self.save_data
 
