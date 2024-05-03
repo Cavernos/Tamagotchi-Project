@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-import tamagotchi
-
-#--------------- Player ---------------#
-
-=======
 # dev Cavernos
->>>>>>> origin/dev
-class Player:
+import models.tamagotchi_file as tamagotchi_file
+
+
+class Player():
     """
     A classed used to represent a Player
     ...
@@ -58,32 +54,7 @@ class Player:
         Name Setter
         """
         self._name = value
-<<<<<<< HEAD
-        return
 
-    # Methods
-    def give_biscuit(self, tam) -> None:
-        """
-        The Player feed the tamagotchi
-        """
-        self.biscuits =  self.biscuits - 1
-        tamagotchi.eat(tam)
-        return
-
-    def play_with(self, tam) -> None:
-        """
-        The Player play with the tamagotchi
-        """
-        tamagotchi.play(tam)
-        return
-
-
-#--------------- Test ---------------#
-
-if __name__ == "__main__":
-    ...
-=======
-
-    def give_biscuit(self):
+    def give_biscuit(self,  tamagotchi: dict):
         self.biscuit = self.biscuit - 1
->>>>>>> origin/dev
+        tamagotchi_file.eat(tamagotchi)

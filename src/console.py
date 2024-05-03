@@ -1,9 +1,9 @@
 from threading import Event
 import logging
 
-import tamagotchi_file
+import models.tamagotchi_file as tamagotchi_file
 
-from Player import Player
+from models.Player import Player
 from clock import Clock
 from game_saver import GameSaver
 

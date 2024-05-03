@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from Player import Player
+from models.Player import Player
 
 
 class GameSaver:

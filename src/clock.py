@@ -1,6 +1,6 @@
 import logging
 import threading
-import tamagotchi_file
+import models.tamagotchi_file as tamagotchi_file
 from threading import Event
 from config import DAY_DURATION
 import time

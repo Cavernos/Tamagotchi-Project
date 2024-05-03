@@ -2,7 +2,7 @@
 
 import random
 import unittest
-import tamagotchi_file
+import models.tamagotchi_file as tamagotchi_file
 from config import CARACTERISTICS_INITIAL_VALUE
 
 

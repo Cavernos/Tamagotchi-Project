@@ -2,7 +2,7 @@
 from threading import Event
 from unittest.mock import mock_open, patch
 
-from Player import Player
+from models.Player import Player
 from clock import Clock
 from config import CARACTERISTICS_INITIAL_VALUE
 from game_saver import GameSaver

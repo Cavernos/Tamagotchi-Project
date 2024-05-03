@@ -2,7 +2,7 @@ import logging
 from optparse import OptionParser
 
 import keyboard
-from Player import Player
+from models.Player import Player
 from console import Console
 
 
