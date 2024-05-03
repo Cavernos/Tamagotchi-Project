@@ -3,6 +3,7 @@
 # import
 import tamagotchi
 
+
 #--------------- Player ---------------#
 class Player:
     """
@@ -30,6 +31,9 @@ class Player:
         self._biscuits: int = biscuits
         return
     
+
+    # property & setter
+
     @property
     def biscuits(self) -> int:
         """
@@ -57,7 +61,9 @@ class Player:
         self._name = value
         return
     
-# Methods
+
+    # Methods
+
     def give_biscuit(self, tama) -> None:
         """
         The Player feed the tamagotchi
