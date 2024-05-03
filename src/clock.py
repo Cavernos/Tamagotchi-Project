@@ -1,5 +1,6 @@
 import threading
 import tamagotchi
+from threading import Event
 from config import DAY_DURATION
 import time
 
@@ -22,7 +23,7 @@ class Clock(threading.Thread):
         statement : str
             reason why the thread was stopped
        """
-    def __init__(self, name: str = "") -> None:
+    def __init__(self, name: str, event: Event) -> None:
         """
         Parameters
         ----------
@@ -33,15 +34,16 @@ class Clock(threading.Thread):
         self.day_duration = DAY_DURATION
         self.tamagotchis = tamagotchi.tamagotchis
         self.statement = ""
-        self.running = False
+        self.event = event
         self.game_time = [0, 0]
 
     def run(self) -> None:
         """
         Run method (principal thread function) verify condition and execute tamagotch's method
         """
-        self.running = True
         while self.day_duration:
+            if self.event.set():
+                return
             for element in self.tamagotchis:
                 if tamagotchi.battle(element):
                     tamagotchi.is_in_battle(self.tamagotchis)

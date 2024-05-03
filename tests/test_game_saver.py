@@ -1,9 +1,6 @@
 # dev Cavernos
-<<<<<<< HEAD
-=======
 from unittest.mock import mock_open, patch
 
->>>>>>> f5768052401766a9e4452cecaec499e88bf4c327
 from Player import Player
 from clock import Clock
 from config import CARACTERISTICS_INITIAL_VALUE
