@@ -14,6 +14,7 @@ class Main:
         parser.add_option("-h", "--help", action='help', help="Afficher les informations d'utilisation")
         parser.add_option(
             "-g", "--gui", help="Afficher le GUI", action="callback", callback=self.gui)
+        parser.add_option("")
         parser.set_description("hello")
         (options, args) = parser.parse_args()
 
