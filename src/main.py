@@ -1,23 +1,27 @@
+from optparse import OptionParser
+
 import keyboard
-from Console import Game
 from Player import Player
-from Tamagotchi import Tamagotchi
+
 
 class Main:
     def __init__(self) -> None:
         pass
 
-game = Game()
-game.start()
-while True:
-    if keyboard.is_pressed("Esc"):
-        break
-    if game.is_day:
-        for tamagotchi in tamagotchis:
-            tamagotchi.awake()
-    if not game.is_day:
-        for tamagotchi in tamagotchis:
-            tamagotchi.sleep()
- 
 
+    def launch(self):
+        usage = "%prog [Argument] arg1 arg2"
+        parser = OptionParser(usage=usage, add_help_option=False)
+        parser.add_option("-h", "--help", action='help', help="Afficher les informations d'utilisation")
+        parser.add_option(
+            "-g", "--gui", help="Afficher le GUI", action="callback", callback=self.gui)
+        parser.set_description("hello")
+        (options, args) = parser.parse_args()
+
+    def gui(self, option, opt, value, parser):
+        print("parser.usage")
+
+
+if __name__ == "__main__":
+    Main().launch()
 
