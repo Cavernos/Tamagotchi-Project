@@ -2,7 +2,7 @@ import logging
 from optparse import OptionParser
 
 import keyboard
-from models.Player import Player
+from models.player import Player
 from console import Console
 
 
@@ -19,7 +19,8 @@ class Main:
         self.options, self.args = self.parser.parse_args()
 
     def launch(self):
-        logging.basicConfig(level=self.options.debug.upper())
+        if self.options.debug is not None:
+            logging.basicConfig(level=self.options.debug.upper())
         self.console()
 
     def gui(self, option, opt, value, parser):
