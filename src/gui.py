@@ -2,13 +2,18 @@
 
 # import
 import pygame
-import player
+from clock import Clock
+from player import Player
 import tamagotchi
 
 
 class GameWindow:
     def __init__(self, width: int, height: int):
         self.window = pygame.display.set_mode((width, height))
+        self.clock = Clock("console_game")
+        self.player = Player("Michel")
+
+        # init pygame
         self.clock = pygame.time.Clock()
         pygame.font.init()
         pygame.display.set_caption("TamaGOATchi")
@@ -26,12 +31,8 @@ class GameWindow:
         textRect.center = (x, y)
         self.window.blit(text, textRect)
 
-    def menu_start(self, color: str= (66, 73, 73)):
-        self.window.fill(color)
-        pygame.draw.line(self.window, (40, 40, 40), (0, 0), (gameWindow.window.get_width(), 0), 20)
-        pygame.draw.line(self.window, (40, 40, 40), (gameWindow.window.get_width(), 0), (gameWindow.window.get_width(), gameWindow.window.get_height()), 20)
-        pygame.draw.line(self.window, (40, 40, 40), (gameWindow.window.get_width(), gameWindow.window.get_height()), (0, gameWindow.window.get_height()), 20)
-        pygame.draw.line(self.window, (40, 40, 40), (0, gameWindow.window.get_height()), (0, 0), 20)
+    def menu_start(self):
+        ...
     
     def setting(self):
         ...
@@ -46,10 +47,11 @@ class Game:
     def __init__(self) -> None:
         self.in_game = False
 
-# set gameWindow
+
+
+# set gameWindow and game
 gameWindow = GameWindow(1200,720)
 game = Game()
-
 
 # main loop
 while game.in_game:
