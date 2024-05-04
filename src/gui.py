@@ -7,43 +7,65 @@ import tamagotchi
 
 
 class GameWindow:
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-        self.window = pygame.display.set_mode((self.width,self.height))
+    def __init__(self, width: int, height: int):
+        self.window = pygame.display.set_mode((width, height))
         self.clock = pygame.time.Clock()
         pygame.font.init()
         pygame.display.set_caption("TamaGOATchi")
     
-    def set_background(self, color: str):
-        self.window.fill(color)
-
-    def write_in_game_window(self, txt: str, x: float= 0, y: float= 0):
-        my_font = pygame.font.SysFont('Comic Sans MS', 30)
-    
-        text = my_font.render(txt, True, "black")
-        
+    def write_in_game_window(self,
+                             txt: str,
+                             font: str,
+                             size: int,
+                             color: str,
+                             x: float= 0,
+                             y: float= 0):
+        my_font = pygame.font.SysFont(font, size)
+        text = my_font.render(txt, True, color)
         textRect = text.get_rect()
-        # textRect.center = (x, y)
-        
+        textRect.center = (x, y)
         self.window.blit(text, textRect)
 
+    def menu_start(self, color: str= (66, 73, 73)):
+        self.window.fill(color)
+        pygame.draw.line(self.window, (40, 40, 40), (0, 0), (gameWindow.window.get_width(), 0), 20)
+        pygame.draw.line(self.window, (40, 40, 40), (gameWindow.window.get_width(), 0), (gameWindow.window.get_width(), gameWindow.window.get_height()), 20)
+        pygame.draw.line(self.window, (40, 40, 40), (gameWindow.window.get_width(), gameWindow.window.get_height()), (0, gameWindow.window.get_height()), 20)
+        pygame.draw.line(self.window, (40, 40, 40), (0, gameWindow.window.get_height()), (0, 0), 20)
+    
+    def setting(self):
+        ...
+    
+    def tamagotchis(self):
+        ...
+    
+    def tamagotchi(self, tamagotchi):
+        ...
+
+class Game:
+    def __init__(self) -> None:
+        self.in_game = False
 
 # set gameWindow
 gameWindow = GameWindow(1200,720)
-in_game = True
+game = Game()
 
 
 # main loop
-while in_game:
+while game.in_game:
     # pygame.QUIT
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            in_game = False
+            game.in_game = False
 
     # fill the screen with a color to wipe away anything from last frame
-    gameWindow.set_background("gray")
-    gameWindow.write_in_game_window("TamaGOATchi", gameWindow.window.get_width()//2, gameWindow.window.get_height()//2)
+    gameWindow.menu_start()
+    gameWindow.write_in_game_window(txt="TamaGOATchi",
+                                    font='Comic Sans MS',
+                                    size=100,
+                                    color=(95, 106, 106),
+                                    x=gameWindow.window.get_width()//2,
+                                    y=gameWindow.window.get_height()//2)
 
     # flip() the display to put your work on screen
     pygame.display.flip()
