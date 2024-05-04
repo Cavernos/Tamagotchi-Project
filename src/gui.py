@@ -3,7 +3,7 @@
 # import
 import pygame
 from clock import Clock
-from player import Player
+from models.player import Player
 import tamagotchi
 
 
