@@ -1,7 +1,7 @@
 Vous disposez de {player.biscuits} croquettes et nous venons de vous remettre vos tamagotchis.
 Vous pouvez realisez les actions suivante:
 S - Afficher le statut des tamagotchis
-N - Nourrir un tamagotchi (Cela coûte une croquette)
+N - Nourrir un tamagotchi (Cela coute une croquette)
 J - Jouer avec l'un des tamagotchis
 Q - Quitter le jeu
 

@@ -1,4 +1,3 @@
-# dev kartik-madhak
 import logging
 import string
 from typing import Any

@@ -10,7 +10,7 @@ Q - Quitter
 ;;input choice
 
 ;;if choice == 'N'
-;;redirect 'game'
+;;redirect 'personalization'
 
 ;;if choice == 'L'
 ;;redirect 'game.load'
