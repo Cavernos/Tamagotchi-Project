@@ -1,0 +1,20 @@
+--------------------------------------------------------
+             Bienvenue dans Tamagoatchi
+--------------------------------------------------------
+{error}
+Que voulez vous faire ?
+N - Commencer une nouvelle Partie
+L - Charger une partie
+Q - Quitter
+
+;;input choice
+
+;;if choice == 'N'
+;;redirect 'game'
+
+;;if choice == 'L'
+;;get {game_data}
+;;redirect 'game.load'
+
+;;if choice == 'Q'
+;;redirect 'game.quit'
