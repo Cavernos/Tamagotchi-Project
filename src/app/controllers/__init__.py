@@ -1,5 +1,6 @@
 from lib.communication import Request
-from app.controllers import *
+from app.controllers.HomeController import *
+from app.controllers.GameController import *
 
 __calledControllers = {}
 
@@ -7,6 +8,6 @@ __calledControllers = {}
 def call_controller(name: str, method: str, request: Request):
     try:
         tmp = __calledControllers[name]
-    except:
+    except KeyError:
         tmp = __calledControllers[name] = globals()[name]()
     return getattr(tmp, method)(request)

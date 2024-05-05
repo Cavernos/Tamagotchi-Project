@@ -8,4 +8,4 @@ class Observer(ABC):
         pass
 
     def notify(self, event: Event):
-        raise NotImplementedError
+        pass

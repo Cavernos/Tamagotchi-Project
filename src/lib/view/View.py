@@ -32,7 +32,7 @@ class SuperFormatter(string.Formatter):
 class View:
     def __init__(self, path: str, objects: dict, ext_dict: dict) -> None:
         self.path = path
-        self.qualified_path_name = ROOT_DIR + '\\view\\' + path + '.txt'
+        self.qualified_path_name = ROOT_DIR + '\\views\\' + path + '.txt'
         self.inputs = {}
         self.objects = objects
         with open(self.qualified_path_name, 'r') as file:
@@ -61,7 +61,7 @@ class View:
                                     self.qualified_path_name + ':' + str(line_count))
     def ObjectMappingLayer(self, objects: dict = None) -> None:
         super_formater = SuperFormatter()
-        self.__content = sf.format(self.__content, **objects)
+        self.__content = super_formater.format(self.__content, **objects)
 
     def langParser(self) -> int:
         input_dict = {}

@@ -1,6 +1,8 @@
 import enum
 from typing import List
 
+from lib.event import Observer
+
 
 class EventType(enum.Enum):
     info = 0

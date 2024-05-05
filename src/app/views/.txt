@@ -13,8 +13,7 @@ Q - Quitter
 ;;redirect 'game'
 
 ;;if choice == 'L'
-;;get {game_data}
 ;;redirect 'game.load'
 
-;;if choice == 'Q'
-;;exit
+;;if choice == 'q'
+;;redirect 'home.exit'
