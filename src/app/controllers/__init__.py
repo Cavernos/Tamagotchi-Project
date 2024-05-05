@@ -1,6 +1,7 @@
 from lib.communication import Request
 from app.controllers.HomeController import *
 from app.controllers.GameController import *
+from app.controllers.GamePersonalizerController import *
 
 __calledControllers = {}
 

@@ -1,0 +1,5 @@
+{error}
+Choisissez un nom ? ;;input name
+;;redirect 'personalization.player'
+;;if 'player' == 'True'
+Votre Nom: {player.name}
