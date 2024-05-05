@@ -17,4 +17,4 @@ Q - Quitter
 ;;redirect 'game.load'
 
 ;;if choice == 'Q'
-;;redirect 'game.quit'
+;;exit

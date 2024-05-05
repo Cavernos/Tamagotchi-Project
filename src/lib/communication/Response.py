@@ -1,6 +1,6 @@
 import enum
 
-from lib.views.View import View
+from lib.view.View import View
 
 
 class ResponseType(enum.Enum):
