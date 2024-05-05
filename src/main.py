@@ -24,7 +24,7 @@ class Main:
         self.console()
 
     def gui(self, option, opt, value, parser):
-        print("parser.usage")
+        pass
     
     def console(self):
         console = Console()

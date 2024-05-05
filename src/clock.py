@@ -24,7 +24,7 @@ class Clock(threading.Thread):
         statement : str
             reason why the thread was stopped
        """
-    def __init__(self, name: str, event: Event) -> None:
+    def __init__(self, name: str) -> None:
         """
         Parameters
         ----------
@@ -35,7 +35,7 @@ class Clock(threading.Thread):
         self.day_duration = DAY_DURATION
         self.tamagotchis = tamagotchi_file.tamagotchis
         self.statement = ""
-        self.event = event
+        self.event = Event()
         self.game_time = [0, 0]
 
     def run(self) -> None:
@@ -62,6 +62,7 @@ class Clock(threading.Thread):
             time.sleep(1)
             self.calc_game_time()
             self.day_duration -= 1
+
         for element in self.tamagotchis:
             tamagotchi_file.night_duration(element)
         self.statement = "Fin de la journée"
