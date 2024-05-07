@@ -11,4 +11,4 @@ def main_cli():
         system('cls')
 
 if __name__ == '__main__':
-    main_cli()  
+    main_cli() 

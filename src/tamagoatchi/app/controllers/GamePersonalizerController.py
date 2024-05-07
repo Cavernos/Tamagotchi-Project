@@ -7,7 +7,7 @@ from tamagoatchi.app.models import tamagotchis
 class GamePersonalizerController:
     @staticmethod
     def show_personalization(request: Request) -> Response:
-        view = View('personalization', {"player": Player(), "tamagotchis": tamagotchis}, request.json)
+        view = View('personalization', {"player": Player(), "tamagotchis": tamagotchis, "tamagotchi_keys": tamagotchis[0].keys()}, request.json)
         return Response(ResponseType.valid, view)
 
     @staticmethod

@@ -11,7 +11,7 @@ Tamagotchis :
 \
 Statistiques
     Nom     Sante   Faim    Ennui   Soif    Fatigue
-{tamagotchis:repeat as tamagotchi:   tamagotchis.keys():repeat as key: {{tamagotchi[key]}}
+{tamagotchis:repeat as tamagotchi:  {tamagotchi_keys:repeat as key: test}
 }
 \
 
