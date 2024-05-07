@@ -27,8 +27,13 @@ dev = [
 ]
 test = ["pytest>=8.1.1"]
 
+[project.scripts]
+tamagotchi = "app.main.main:main_cli"
+
 [tool.setuptools]
 package-dir = {"" = "src"}
+include-package-data = true
+
 
 [tool.pytest.ini_options]
 minversion = "8.1.1"
