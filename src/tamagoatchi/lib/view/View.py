@@ -49,15 +49,16 @@ class View:
                 res = line.partition(';;Input:')[2]
                 if res == '':
                     logging.error("Error compiling view, Input name not given in line at " +
-                                    self.qualified_path_name + ':' + str(line_count))
+                                  self.qualified_path_name + ':' + str(line_count))
                     raise Exception("Error compiling view, Input name not given in line at " +
                                     self.qualified_path_name + ':' + str(line_count))
             line_count += 1
         if open_brackets != 0:
             logging.error("Error compiling view, Input name not given in line at " +
-                                    self.qualified_path_name + ':' + str(line_count))
+                          self.qualified_path_name + ':' + str(line_count))
             raise Exception("Error compiling view, Bracket mismatch at " +
-                                    self.qualified_path_name + ':' + str(line_count))
+                            self.qualified_path_name + ':' + str(line_count))
+
     def ObjectMappingLayer(self, objects: dict = None) -> None:
         super_formater = SuperFormatter()
         self.__content = super_formater.format(self.__content, **objects)
@@ -91,7 +92,13 @@ class View:
             if skip_if:
                 continue
 
-            if ';;inputL' in line:
+            if ';;inputList' in line:
+                pre, trash, post = line.partition(';;inputList')
+                print(pre, end='')
+                post = post.strip()
+                input_dict[post] = [input() for i in range]
+                input_dict[post].append()
+            elif ';;inputL' in line:
                 pre, trash, post = line.partition(';;inputL')
                 print(pre, end='')
                 post = post.strip()
@@ -105,7 +112,14 @@ class View:
                 pre, trash, post = line.partition(';;input')
                 print(pre, end='')
                 post = post.strip()
-                input_dict[post] = input()
+                if post[0] == '[' and post[-1] == ']':
+                    post = post.strip('[')
+                    post = post.strip(']')
+                    if not post in input_dict.keys():
+                        input_dict[post] = []
+                    input_dict[post] += [input()]
+                else:
+                    input_dict[post] = input()
             elif ';;redirect' in line:
                 tmp = line.lstrip(';;redirect ').strip()
                 if "'" in tmp:
@@ -146,6 +160,7 @@ class View:
                 self.header['inputs'][key] = input_dict[key]
 
         return 0
+
     def render(self) -> int:
         return_val = self.langParser()
         if return_val == 1:
@@ -155,12 +170,3 @@ class View:
     def parse(self, objects) -> str:
         self.ObjectMappingLayer(objects)
         return self.__content
-
-
-
-
-
-
-
-
-

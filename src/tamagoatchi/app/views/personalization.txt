@@ -10,27 +10,28 @@ Vos biscuits: {player.biscuits}
 Tamagotchis : 
 \
 Statistiques
-    Nom     Sante   Faim    Ennui   Soif    Fatigue
-{tamagotchis:repeat as tamagotchi:  {tamagotchi_keys:repeat as key: test}
-}
+{tamagotchi_status}
 \
 
 
 N - Choisissez un nom
 T - Choisissez un nom pour vos tamagotchis
-C  - Continuer
+C - Continuer
+Q - Quitter
 
 ;;input choice
 
 ;;if choice == 'N'
 Choisissez un nom ? ;;input playername
 ;;redirect 'personalization.player'
-;;default
 
 
 ;;if choice == 'T'
-{tamagotchis:repeat as tamagotchi:Nom du tamagotchi {{i}} :  ;;input tamaname}
+{tamagotchis:repeat as tamagotchi:Nom du tamagotchi {{i}} : ;;input [tamaname]}
 ;;redirect 'personalization.tamagotchi'
 
 ;;if choice == 'C'
 ;;redirect 'game.load'
+
+;;if choice == 'Q'
+;;redirect 'home.exit'

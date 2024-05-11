@@ -144,12 +144,14 @@ def get_status(tamagotchis: list[dict]) -> list:
     return tamagotchis_status
 
 
-def print_status(tamagotchis_status: list[list]= get_status(tamagotchis)) -> None:
+def print_status() -> str:
     """
         This function print the tamagotchi status
     """
+    tamagotchis_status: list[list] = get_status(tamagotchis)
+    return_str = ""
     for i in range(len(tamagotchis[0].keys()) - NOT_PRINTABLE_KEYS):
-        print("")
+        return_str += "\n"
         for j in range(len(tamagotchis) + 1):
-            print(format(str(tamagotchis_status[i][j]), "<15"), end="")
-    print("")
+            return_str += format(str(tamagotchis_status[i][j]), "<15")
+    return return_str
