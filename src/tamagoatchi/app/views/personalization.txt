@@ -31,6 +31,7 @@ Choisissez un nom ? ;;input playername
 ;;redirect 'personalization.tamagotchi'
 
 ;;if choice == 'C'
+;;push {player.__dict__}
 ;;redirect 'game.load'
 
 ;;if choice == 'Q'

@@ -1,3 +1,4 @@
+import json
 import logging
 import string
 from typing import Any
@@ -139,7 +140,9 @@ class View:
                         post = '0'
                 if 'ext' not in input_dict:
                     input_dict['ext'] = []
-                input_dict['ext'].append(int(post))
+                if post[1] == '{':
+                    post = post.replace("\'", "\"")
+                input_dict['ext'].append(post)
             elif ';;exit' == line or ';;exit' in line:
                 return -1
             elif ';;refresh' == line or ';;refresh' in line:
