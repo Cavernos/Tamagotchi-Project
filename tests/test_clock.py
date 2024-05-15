@@ -4,9 +4,8 @@ from threading import Event
 import time
 import unittest
 import random
-import logging
 from unittest.mock import patch
-from clock import Clock
+from tamagoatchi.app.time import Clock
 from config import NUMBER_OF_TAMAGOTCHI, CARACTERISTICS_INITIAL_VALUE, DAY_DURATION
 
 

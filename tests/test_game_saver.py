@@ -1,9 +1,8 @@
 # dev Cavernos
 from threading import Event
-from unittest.mock import mock_open, patch
 
 from models.Player import Player
-from clock import Clock
+from tamagoatchi.app.time import Clock
 from config import CARACTERISTICS_INITIAL_VALUE
 from game_saver import GameSaver
 import unittest
