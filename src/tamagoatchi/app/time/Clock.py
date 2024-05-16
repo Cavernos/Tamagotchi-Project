@@ -36,8 +36,8 @@ class Clock(threading.Thread, Model):
         threading.Thread.__init__(self, name=name, daemon=True)
         self.day_duration = DAY_DURATION
         self.tamagotchis = tamagotchi_file.tamagotchis
-        self.statement = ""
         self.event = Event()
+        self._days = 0
         self.game_time = [0, 0]
 
     def run(self) -> None:
@@ -47,7 +47,6 @@ class Clock(threading.Thread, Model):
         while self.day_duration:
             logging.debug(tamagotchi_file.tamagotchis)
             if self.event.is_set():
-                self.join()
                 return
             for element in self.tamagotchis:
                 if tamagotchi_file.battle(element):
@@ -66,9 +65,10 @@ class Clock(threading.Thread, Model):
 
         for element in self.tamagotchis:
             tamagotchi_file.night_duration(element)
-            if not tamagotchi_file.die(element):
-                self.day_duration = DAY_DURATION
-                self.run()
+        self.day_duration = DAY_DURATION
+        self._days += 1
+        self.run()
+
 
     def calc_game_time(self):
         """
@@ -86,3 +86,7 @@ class Clock(threading.Thread, Model):
         Print Time is a time printer
         """
         print(f"{"0" if self.game_time[0] < 10 else ""}{self.game_time[0]}:{"0" if self.game_time[1] < 10 else ""}{self.game_time[1]}")
+
+    @property
+    def days(self) -> int:
+        return self._days

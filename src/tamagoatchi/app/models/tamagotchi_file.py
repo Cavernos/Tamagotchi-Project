@@ -2,7 +2,8 @@
 # A file to manage tamagotchis actions
 
 import random
-from tamagoatchi.app.definitions import NUMBER_OF_TAMAGOTCHI, NOT_PRINTABLE_KEYS, CARACTERISTICS_INITIAL_VALUE
+from tamagoatchi.app.definitions import NUMBER_OF_TAMAGOTCHI, NOT_PRINTABLE_KEYS, CARACTERISTICS_INITIAL_VALUE, \
+    DAY_DURATION
 
 # Lists of Tamagotchis
 tamagotchis = [
@@ -98,7 +99,7 @@ def night_duration(tamagotchi: dict) -> None:
         tamagotchi : dict
             One tamagotchi
     """
-    tamagotchi["night_duration"] = random.randint(30, 60)
+    tamagotchi["night_duration"] = random.randint(DAY_DURATION // 6, DAY_DURATION // 3)
 
 
 def sleep_zzz(tamagotchi: dict) -> None:

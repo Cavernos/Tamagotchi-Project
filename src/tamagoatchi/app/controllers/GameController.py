@@ -9,6 +9,9 @@ from tamagoatchi.app.models import Player
 
 
 class GameController(Controller):
+    def __init__(self) -> None:
+        self.clock = Clock(name='game_clock')
+        self.clock.start()
 
     @staticmethod
     def new_game(request: Request) -> Response:
@@ -16,16 +19,17 @@ class GameController(Controller):
         view = View('game', {'player': player}, request.json)
         return Response(ResponseType.valid, view)
 
-    @staticmethod
-    def load_game(request: Request) -> Response:
+    def game(self, request: Request) -> Response:
         if "ext" in request.inputs.keys():
             player: Player = Player.get_instance(request.inputs["ext"][0])
         else:
             player = Player()
-        clock = Clock(name="")
-        clock.start()
-        if not clock.is_alive():
-            return Response(ResponseType.error, View('', {"error": "Vous avez perdu !"}, request.json))
+        print(self.clock.days)
+        if not self.clock.is_alive():
+            self.clock.join()
+            return Response(ResponseType.error, View('',
+                                                     {"error": "Vous avez perdu ! Un des tamagotchis est mort"},
+                                                     request.json))
         return Response(ResponseType.valid, View('game',
                                                  {'tamagotchis': tamagotchi_file,
                                                   'player': player

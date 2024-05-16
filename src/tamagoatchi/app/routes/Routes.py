@@ -8,8 +8,7 @@ def get_routes() -> dict:
             '': RouteBuilder(controller='HomeController.show_home'),
             'home.exit': RouteBuilder(controller='HomeController.exit'),
 
-            'game': RouteBuilder(controller='GameController.new_game'),
-            'game.load': RouteBuilder(controller='GameController.load_game'),
+            'game.load': RouteBuilder(controller='GameController.game'),
             'game.play': RouteBuilder(controller='GameController.play'),
             'game.eat': RouteBuilder(controller='GameController.eat'),
 
