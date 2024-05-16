@@ -92,13 +92,6 @@ class View:
 
             if skip_if:
                 continue
-
-            if ';;inputList' in line:
-                pre, trash, post = line.partition(';;inputList')
-                print(pre, end='')
-                post = post.strip()
-                input_dict[post] = [input() for i in range]
-                input_dict[post].append()
             elif ';;inputL' in line:
                 pre, trash, post = line.partition(';;inputL')
                 print(pre, end='')
@@ -128,21 +121,13 @@ class View:
                 elif tmp in input_dict:
                     input_dict['form_redirect'] = input_dict[tmp]
             elif ';;push' in line:
-                post = line.partition(';;push')[2]
-                if '[' in post:
-                    try:
-                        arr_name = post.split('[')[0].strip()
-                        index_name = post.split('[')[1].strip()
-                        var = self.objects[arr_name][int(input_dict[index_name]) - 1]
-                        attr = post.split('.')[1]
-                        post = getattr(var, attr)
-                    except:
-                        post = '0'
+                post = line.partition(';;push')[2].replace("\'", "\"").lstrip()
                 if 'ext' not in input_dict:
                     input_dict['ext'] = []
-                if post[1] == '{':
-                    post = post.replace("\'", "\"")
-                input_dict['ext'].append(post)
+                try:
+                    input_dict['ext'].append(json.loads(post))
+                except:
+                    input_dict['ext'].append(post)
             elif ';;exit' == line or ';;exit' in line:
                 return -1
             elif ';;refresh' == line or ';;refresh' in line:

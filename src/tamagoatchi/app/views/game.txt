@@ -6,3 +6,20 @@ J - Jouer avec l'un des tamagotchis
 Q - Quitter le jeu
 
 ;;input choice
+
+;;if choice == 'S'
+{tamagotchis.print_status:call}
+
+;;if choice == 'J'
+Avec quel tamagotchi voulez vous jouer : ;;input name
+;;push {player.__dict__}
+;;redirect 'game.play'
+
+;;if choice == 'N'
+Quel tamagotchi voulez vous nourrir : ;;input name
+;;push {player.__dict__}
+;;redirect 'game.eat'
+
+;;if choice == 'Q'
+;;redirect 'home.exit'
+

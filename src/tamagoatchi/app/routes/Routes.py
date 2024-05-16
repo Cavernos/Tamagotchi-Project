@@ -10,6 +10,8 @@ def get_routes() -> dict:
 
             'game': RouteBuilder(controller='GameController.new_game'),
             'game.load': RouteBuilder(controller='GameController.load_game'),
+            'game.play': RouteBuilder(controller='GameController.play'),
+            'game.eat': RouteBuilder(controller='GameController.eat'),
 
             'personalization': RouteBuilder(controller='GamePersonalizerController.show_personalization'),
             'personalization.player': RouteBuilder(controller='GamePersonalizerController.new_player'),

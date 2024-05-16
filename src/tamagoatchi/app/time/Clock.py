@@ -5,8 +5,10 @@ from threading import Event
 from tamagoatchi.app.definitions import DAY_DURATION
 import time
 
+from tamagoatchi.lib.model import Model
 
-class Clock(threading.Thread):
+
+class Clock(threading.Thread, Model):
     """
        A classed used to represent the Time
        ...
@@ -31,7 +33,7 @@ class Clock(threading.Thread):
         name : str
             The name of the thread
         """
-        threading.Thread.__init__(self, name=name)
+        threading.Thread.__init__(self, name=name, daemon=True)
         self.day_duration = DAY_DURATION
         self.tamagotchis = tamagotchi_file.tamagotchis
         self.statement = ""
@@ -45,13 +47,12 @@ class Clock(threading.Thread):
         while self.day_duration:
             logging.debug(tamagotchi_file.tamagotchis)
             if self.event.is_set():
+                self.join()
                 return
             for element in self.tamagotchis:
                 if tamagotchi_file.battle(element):
                     tamagotchi_file.is_in_battle(self.tamagotchis)
                 if tamagotchi_file.die(element):
-                    self.statement = "Le tamagotchi est mort"
-                    logging.info("le tamagotchi est mort")
                     return
                 if self.day_duration <= element["night_duration"]:
                     logging.info(f"C'est la nuit {element["name"]}")
@@ -65,7 +66,9 @@ class Clock(threading.Thread):
 
         for element in self.tamagotchis:
             tamagotchi_file.night_duration(element)
-        self.statement = "Fin de la journée"
+            if not tamagotchi_file.die(element):
+                self.day_duration = DAY_DURATION
+                self.run()
 
     def calc_game_time(self):
         """

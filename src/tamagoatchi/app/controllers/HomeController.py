@@ -1,3 +1,5 @@
+import json
+
 from tamagoatchi.lib.communication import Response, Request, ResponseType
 from tamagoatchi.lib.controller import Controller
 from tamagoatchi.lib.event import Event, EventType
@@ -13,5 +15,3 @@ class HomeController(Controller):
     @staticmethod
     def exit(request: Request) -> None:
         exit(0)
-
-

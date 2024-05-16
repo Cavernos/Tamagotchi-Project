@@ -15,5 +15,5 @@ Q - Quitter
 ;;if choice == 'L'
 ;;redirect 'game.load'
 
-;;if choice == 'q'
+;;if choice == 'Q'
 ;;redirect 'home.exit'

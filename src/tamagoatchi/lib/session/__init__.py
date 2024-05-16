@@ -1,0 +1,1 @@
+from tamagoatchi.lib.session.DictSession import *
