@@ -3,7 +3,7 @@ import json
 from tamagoatchi.app.time import Clock
 from tamagoatchi.lib.communication import Request, Response, ResponseType
 from tamagoatchi.lib.controller import Controller
-from tamagoatchi.lib.view import View
+from tamagoatchi.lib.view import ConsoleView
 from tamagoatchi.app.models import tamagotchi_file
 from tamagoatchi.app.models import Player
 
@@ -41,10 +41,10 @@ class GameController(Controller):
             player = Player()
         if not self.clock.is_alive():
             self.clock.join()
-            return Response(ResponseType.error, View('',
+            return Response(ResponseType.error, ConsoleView('',
                                                      {"error": "Vous avez perdu ! Un des tamagotchis est mort"},
                                                      request.json))
-        return Response(ResponseType.valid, View('game',
+        return Response(ResponseType.valid, ConsoleView('game',
                                                  {'tamagotchis': tamagotchi_file,
                                                   'player': player
                                                   },
@@ -65,7 +65,7 @@ class GameController(Controller):
             if tamagotchi['name'] == name_of_tamagotchi and self.clock.day_duration > tamagotchi['night_duration']:
                 player.play_with(tamagotchi)
         request.json['form_redirect'] = 'game.load'
-        return Response(ResponseType.valid, View("game",
+        return Response(ResponseType.valid, ConsoleView("game",
                                                  {'player': player, 'tamagotchis': tamagotchi_file},
                                                  request.json))
 
@@ -84,6 +84,6 @@ class GameController(Controller):
             if tamagotchi['name'] == name_of_tamagotchi and self.clock.day_duration > tamagotchi['night_duration']:
                 player.give_biscuit(tamagotchi)
         request.json['form_redirect'] = 'game.load'
-        return Response(ResponseType.valid, View("game",
+        return Response(ResponseType.valid, ConsoleView("game",
                                                  {'player': player, 'tamagotchis': tamagotchi_file},
                                                  request.json))
