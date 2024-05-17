@@ -2,77 +2,71 @@
 
 # import
 import pygame
+import pytmx
+import pyscroll
+
+from threading import Event
+
+import pytmx.util_pygame
 from clock import Clock
 from models.player import Player
 import tamagotchi
 
 
-class GameWindow:
-    def __init__(self, width: int, height: int):
-        self.window = pygame.display.set_mode((width, height))
-        self.clock = Clock("console_game")
-        self.player = Player("Michel")
+class Gui:
+    def __init__(self,
+                 width: int=1024,
+                 height: int=576):
+        self.event = Event()
+        self.clock = Clock("console_game", self.event)
+        self.player = Player("John") 
 
-        # init pygame
-        self.clock = pygame.time.Clock()
-        pygame.font.init()
+        self.screen = pygame.display.set_mode((width, height))
         pygame.display.set_caption("TamaGOATchi")
-    
-    def write_in_game_window(self,
-                             txt: str,
-                             font: str,
-                             size: int,
-                             color: str,
-                             x: float= 0,
-                             y: float= 0):
-        my_font = pygame.font.SysFont(font, size)
-        text = my_font.render(txt, True, color)
-        textRect = text.get_rect()
-        textRect.center = (x, y)
-        self.window.blit(text, textRect)
+        self.pygame_clock = pygame.time.Clock()
+        self.pygame_clock.tick(30)  # limits FPS
+        
+        # map
+        self.map = pytmx.util_pygame.load_pygame('./assets/menu/menu.tmx')
+        self.map_data = pyscroll.data.TiledMapData(self.map)
+        self.map_layer = pyscroll.orthographic.BufferedRenderer(self.map_data, self.screen.get_size())
+        self.map_layer.zoom = 4
 
-    def menu_start(self):
+        # layer
+        self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
+        
+
+    def run(self):
+        # main loop
+        in_game = True
+        while in_game:
+            self.screen.fill("white")
+            self.group.draw(self.screen)
+            pygame.display.flip()
+
+            # pygame.QUIT
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    in_game = False
+    
+        
+        pygame.quit()
+
+    def menu(self):
         ...
     
     def setting(self):
         ...
     
-    def tamagotchis(self):
+    def view_all_tamagotchis(self):
         ...
     
-    def tamagotchi(self, tamagotchi):
+    def view_tamagotchi(self, tamagotchi):
         ...
 
-class Game:
-    def __init__(self) -> None:
-        self.in_game = False
 
 
-
-# set gameWindow and game
-gameWindow = GameWindow(1200,720)
-game = Game()
-
-# main loop
-while game.in_game:
-    # pygame.QUIT
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            game.in_game = False
-
-    # fill the screen with a color to wipe away anything from last frame
-    gameWindow.menu_start()
-    gameWindow.write_in_game_window(txt="TamaGOATchi",
-                                    font='Comic Sans MS',
-                                    size=100,
-                                    color=(95, 106, 106),
-                                    x=gameWindow.window.get_width()//2,
-                                    y=gameWindow.window.get_height()//2)
-
-    # flip() the display to put your work on screen
-    pygame.display.flip()
-
-    gameWindow.clock.tick(30)  # limits FPS
-
-
-pygame.quit()
+if __name__ == '__main__':
+    pygame.init()
+    game = Gui()
+    game.run()
