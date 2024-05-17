@@ -7,6 +7,9 @@ from tamagoatchi.lib.view import View
 
 
 class HomeController(Controller):
+    """
+    Class used to show home page and exit the game
+    """
     @staticmethod
     def show_home(request: Request) -> Response:
         view = View('', {}, request.json)

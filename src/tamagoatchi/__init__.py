@@ -6,7 +6,7 @@ from . import app
 from .app.definitions import LOGGING_LEVEL, ROOT_DIR
 
 # Load Logger Config File
-with open(f'{ROOT_DIR}/conf/logging_config.yaml', 'rt') as file:
+with open(f'{ROOT_DIR}\\conf\\logging_config.yaml', 'rt') as file:
     config = yaml.safe_load(file.read())
 
 # Config Logger

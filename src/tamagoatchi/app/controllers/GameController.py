@@ -9,17 +9,32 @@ from tamagoatchi.app.models import Player
 
 
 class GameController(Controller):
+    """
+    A classed used to control the game and make the link
+    between models and views in relation with the game.
+
+    Attributes
+    ----------
+    clock: Clock
+    The clock used to play the game
+    """
+
     def __init__(self) -> None:
+        """
+        Initialize the clock used for the game
+        """
         self.clock = Clock(name='game_clock')
         self.clock.start()
 
-    @staticmethod
-    def new_game(request: Request) -> Response:
-        player: Player = Player()
-        view = View('game', {'player': player}, request.json)
-        return Response(ResponseType.valid, view)
-
     def game(self, request: Request) -> Response:
+        """
+        Load the game and define if the player has lost the game
+
+        Attributes
+        __________
+        request: Request
+        All the information send by the player when he was redirected
+        """
         if "ext" in request.inputs.keys():
             player: Player = Player.get_instance(request.inputs["ext"][0])
         else:
@@ -36,6 +51,14 @@ class GameController(Controller):
                                                  request.json))
 
     def play(self, request: Request) -> Response:
+        """
+        Define play interaction
+
+        Attributes
+        __________
+        request: Request
+        All the information send by the player when he was redirected
+        """
         name_of_tamagotchi = request.inputs['name']
         player = Player.get_instance(request.inputs['ext'][0])
         for tamagotchi in tamagotchi_file.tamagotchis:
@@ -47,6 +70,14 @@ class GameController(Controller):
                                                  request.json))
 
     def eat(self, request: Request) -> Response:
+        """
+        Define eat interaction
+
+        Attributes
+        __________
+        request: Request
+        All the information send by the player when he was redirected
+        """
         name_of_tamagotchi = request.inputs['name']
         player = Player.get_instance(request.inputs['ext'][0])
         for tamagotchi in tamagotchi_file.tamagotchis:

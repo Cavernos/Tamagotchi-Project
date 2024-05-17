@@ -30,14 +30,14 @@ dev = [
 test = ["pytest>=8.1.1"]
 
 [project.scripts]
-tamagotchi = "tamagoatchi.app.main.main:main_cli"
+tamagoatchi = "tamagoatchi.app.main.main:main_cli"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
 include-package-data = true
 
 [tool.setuptools.package-data]
-"*" = ['*.txt', '.txt']
+"*" = ['*.txt', '.txt', "*.yaml"]
 
 
 [tool.pytest.ini_options]
