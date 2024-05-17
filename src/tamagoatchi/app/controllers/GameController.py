@@ -24,7 +24,6 @@ class GameController(Controller):
             player: Player = Player.get_instance(request.inputs["ext"][0])
         else:
             player = Player()
-        print(self.clock.days)
         if not self.clock.is_alive():
             self.clock.join()
             return Response(ResponseType.error, View('',
@@ -36,24 +35,22 @@ class GameController(Controller):
                                                   },
                                                  request.json))
 
-    @staticmethod
-    def play(request: Request) -> Response:
+    def play(self, request: Request) -> Response:
         name_of_tamagotchi = request.inputs['name']
         player = Player.get_instance(request.inputs['ext'][0])
         for tamagotchi in tamagotchi_file.tamagotchis:
-            if tamagotchi['name'] == name_of_tamagotchi:
+            if tamagotchi['name'] == name_of_tamagotchi and self.clock.day_duration > tamagotchi['night_duration']:
                 player.play_with(tamagotchi)
         request.json['form_redirect'] = 'game.load'
         return Response(ResponseType.valid, View("game",
                                                  {'player': player, 'tamagotchis': tamagotchi_file},
                                                  request.json))
 
-    @staticmethod
-    def eat(request: Request) -> Response:
+    def eat(self, request: Request) -> Response:
         name_of_tamagotchi = request.inputs['name']
         player = Player.get_instance(request.inputs['ext'][0])
         for tamagotchi in tamagotchi_file.tamagotchis:
-            if tamagotchi['name'] == name_of_tamagotchi:
+            if tamagotchi['name'] == name_of_tamagotchi and self.clock.day_duration > tamagotchi['night_duration']:
                 player.give_biscuit(tamagotchi)
         request.json['form_redirect'] = 'game.load'
         return Response(ResponseType.valid, View("game",

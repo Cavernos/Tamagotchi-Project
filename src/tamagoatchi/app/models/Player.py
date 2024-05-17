@@ -2,6 +2,7 @@
 
 import tamagoatchi.app.models.tamagotchi_file as tamagotchi_file
 from tamagoatchi.lib.model import Model
+from tamagoatchi import logger
 
 
 # --------------- Player ---------------#
@@ -65,18 +66,20 @@ class Player(Model):
 
     # Methods
 
-    def give_biscuit(self, tama) -> None:
+    def give_biscuit(self, tama: dict) -> None:
         """
         The Player feed the tamagotchi
         """
         self.biscuits = self.biscuits - 1
+        logger.info("%s eats, You have %i biscuits now", tama['name'], self.biscuits)
         tamagotchi_file.eat(tama)
         return
 
-    def play_with(self, tama) -> None:
+    def play_with(self, tama: dict) -> None:
         """
         The Player play with the tamagotchi
         """
+        logger.info('Play with %s', tama['name'])
         tamagotchi_file.play(tama)
         return
 

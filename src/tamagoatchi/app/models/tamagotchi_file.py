@@ -2,6 +2,8 @@
 # A file to manage tamagotchis actions
 
 import random
+
+from tamagoatchi import logger
 from tamagoatchi.app.definitions import NUMBER_OF_TAMAGOTCHI, NOT_PRINTABLE_KEYS, CARACTERISTICS_INITIAL_VALUE, \
     DAY_DURATION
 
@@ -51,7 +53,7 @@ def play(tamagotchi: dict):
             One tamagotchi
     """
     tamagotchi["boredom"] += 50 if tamagotchi["boredom"] < CARACTERISTICS_INITIAL_VALUE else 0
-    if tamagotchi["tireness"] > 0:
+    if tamagotchi["tireness"] >= 50:
         tamagotchi["tireness"] -= 50
 
 
@@ -63,7 +65,10 @@ def die(tamagotchi: dict):
         tamagotchi : dict
             One tamagotchi
     """
-    return True if tamagotchi["health"] <= 0 else False
+    if tamagotchi["health"] <= 0:
+        logger.info("%s is dead", tamagotchi['name'])
+        return True
+    return False
 
 
 def battle(tamagotchi: dict):
@@ -74,7 +79,10 @@ def battle(tamagotchi: dict):
         tamagotchi : dict
             One tamagotchi
     """
-    return True if tamagotchi["boredom"] <= 0 else False
+    if tamagotchi["boredom"] <= 0:
+        logger.info('%s has started a battle', tamagotchi['name'])
+        return True
+    return False
 
 
 def is_in_battle(tamagotchis: list[dict]) -> None:
@@ -100,6 +108,7 @@ def night_duration(tamagotchi: dict) -> None:
             One tamagotchi
     """
     tamagotchi["night_duration"] = random.randint(DAY_DURATION // 6, DAY_DURATION // 3)
+    logger.debug('%s has set this new night duration : %i', tamagotchi['name'], tamagotchi['night_duration'])
 
 
 def sleep_zzz(tamagotchi: dict) -> None:
@@ -110,6 +119,7 @@ def sleep_zzz(tamagotchi: dict) -> None:
         tamagotchi : dict
             One tamagotchi
     """
+    logger.info('%s is sleep', tamagotchi['name'])
     if (tamagotchi["health"] or tamagotchi["tireness"] or tamagotchi["boredom"]) < CARACTERISTICS_INITIAL_VALUE:
         tamagotchi["health"] += 1
         tamagotchi["tireness"] += 1
@@ -124,8 +134,9 @@ def awake(tamagotchi: dict) -> None:
            tamagotchi : dict
                One tamagotchi
     """
-    tamagotchi["boredom"] -= 3 if tamagotchi["boredom"] > 0 else 0
-    tamagotchi["hunger"] -= 5 if tamagotchi["hunger"] > 0 else 0
+    logger.info('%s is awake', tamagotchi['name'])
+    tamagotchi["boredom"] -= 3 if tamagotchi["boredom"] >= 3 else 0
+    tamagotchi["hunger"] -= 5 if tamagotchi["hunger"] >= 5 else 0
 
 
 def get_status(tamagotchis: list[dict]) -> list:
@@ -142,6 +153,7 @@ def get_status(tamagotchis: list[dict]) -> list:
     for i in range(len(tamagotchis)):
         for j in range(len(tamagotchis[0].keys()) - NOT_PRINTABLE_KEYS):
             tamagotchis_status[j].append(tamagotchis[i][list(tamagotchis[i])[j]])
+    logger.debug('%s', tamagotchis_status)
     return tamagotchis_status
 
 

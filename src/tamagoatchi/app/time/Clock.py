@@ -45,7 +45,6 @@ class Clock(threading.Thread, Model):
         Run method (principal thread function) verify condition and execute tamagotch's method
         """
         while self.day_duration:
-            logging.debug(tamagotchi_file.tamagotchis)
             if self.event.is_set():
                 return
             for element in self.tamagotchis:
@@ -54,10 +53,8 @@ class Clock(threading.Thread, Model):
                 if tamagotchi_file.die(element):
                     return
                 if self.day_duration <= element["night_duration"]:
-                    logging.info(f"C'est la nuit {element["name"]}")
                     tamagotchi_file.sleep_zzz(element)
                 else:
-                    logging.info("C'est le Jour")
                     tamagotchi_file.awake(element)
             time.sleep(1)
             self.calc_game_time()

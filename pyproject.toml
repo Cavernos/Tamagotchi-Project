@@ -23,7 +23,9 @@ Repository = "https://github.com/Cavernos/Tamagotchi-Project.git"
 [project.optional-dependencies]
 dev = [
 "pylint >=2.14.0",
-    "toml >= 0.10.2"
+    "toml >= 0.10.2",
+    "ruamel.yaml",
+    "pyyaml"
 ]
 test = ["pytest>=8.1.1"]
 
