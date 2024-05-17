@@ -21,8 +21,12 @@ class Gui:
         self.clock = Clock("console_game", self.event)
         self.player = Player("John") 
 
+        # screen
         self.screen = pygame.display.set_mode((width, height))
         pygame.display.set_caption("TamaGOATchi")
+        game_icon = pygame.image.load('./assets/tamagotchis/default.png')
+        pygame.display.set_icon(game_icon)
+        
         self.pygame_clock = pygame.time.Clock()
         self.pygame_clock.tick(30)  # limits FPS
         
@@ -40,16 +44,16 @@ class Gui:
         # main loop
         in_game = True
         while in_game:
-            self.screen.fill("white")
             self.group.draw(self.screen)
-            pygame.display.flip()
+            
 
+            
             # pygame.QUIT
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     in_game = False
-    
-        
+
+            pygame.display.flip()
         pygame.quit()
 
     def menu(self):

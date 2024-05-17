@@ -31,10 +31,10 @@
 </data>
  </layer>
  <objectgroup id="2" name="boutons">
-  <object id="2" type="nouvelle_partie" x="92.25" y="86.75" width="73.25" height="7.5"/>
-  <object id="3" type="charger_partie" x="86.75" y="105.5" width="84" height="6"/>
-  <object id="4" type="quitter" x="95.75" y="125" width="64.75" height="5"/>
-  <object id="5" type="parametres" x="1.5" y="1.25" width="51.75" height="6"/>
-  <object id="6" type="credits" x="220" y="1.5" width="34.5" height="5.75"/>
+  <object id="2" type="nouvelle_partie" x="92" y="87" width="74" height="7"/>
+  <object id="3" type="charger_partie" x="86" y="105" width="85" height="7"/>
+  <object id="4" type="quitter" x="95" y="124" width="66" height="7"/>
+  <object id="5" type="parametres" x="1" y="1" width="53" height="7"/>
+  <object id="6" type="credits" x="219" y="1" width="36" height="7"/>
  </objectgroup>
 </map>
