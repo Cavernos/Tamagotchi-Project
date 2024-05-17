@@ -58,8 +58,8 @@ class ConsoleView(View):
         """
         Function search the view and get all text
         """
-        super().__init__(path)
-        self.qualified_path_name = str(ROOT_DIR) + '\\cli\\views\\' + path + '.txt'
+        self.path = path
+        self.qualified_path_name = ROOT_DIR + '\\views\\cli\\' + path + '.txt'
         self.inputs = {}
         self.objects = objects
         with open(self.qualified_path_name, 'r') as file:
