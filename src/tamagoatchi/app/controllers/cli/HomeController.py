@@ -1,5 +1,11 @@
+import json
+
 from tamagoatchi.lib.communication import Response, Request, ResponseType
 from tamagoatchi.lib.controller import Controller
+<<<<<<<< HEAD:src/tamagoatchi/app/cli/controllers/HomeController.py
+========
+from tamagoatchi.lib.event import Event, EventType
+>>>>>>>> d947d55 (Refactor to welcome the new gui version):src/tamagoatchi/app/controllers/cli/HomeController.py
 from tamagoatchi.lib.view import ConsoleView
 
 
