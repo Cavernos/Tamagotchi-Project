@@ -53,13 +53,12 @@ class ConsoleView(View):
     """
     Class used to represent ConsoleView
     """
-
     def __init__(self, path: str, objects: dict, ext_dict: dict) -> None:
         """
         Function search the view and get all text
         """
-        self.path = path
-        self.qualified_path_name = ROOT_DIR + '\\views\\cli\\' + path + '.txt'
+        super().__init__(path)
+        self.qualified_path_name = ROOT_DIR + '\\cli\\views\\' + path + '.txt'
         self.inputs = {}
         self.objects = objects
         with open(self.qualified_path_name, 'r') as file:
