@@ -1,5 +1,5 @@
 from tamagoatchi.lib.communication import Request
-import tamagoatchi.app.controllers as controllers
+import tamagoatchi.app.cli.controllers as controllers
 
 
 class Router:

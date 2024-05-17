@@ -2,6 +2,7 @@ from os import system
 
 import pygame, optparse
 
+from tamagoatchi.app.definitions import ROOT_SIZE
 from tamagoatchi.lib.view import ViewHandler
 
 
@@ -19,7 +20,7 @@ def main_cli():
 
 def main_gui():
     pygame.init()
-    screen = pygame.display.set_mode((1920, 1080))
+    screen = pygame.display.set_mode(ROOT_SIZE)
     running = True
 
     while running:
@@ -32,6 +33,8 @@ def main_gui():
 
 
 if __name__ == '__main__':
+    main_cli()
+    exit(0)
     option_parser = optparse.OptionParser()
     option_parser.add_option('-g', dest="gui", action='store_true')
     (options, args) = option_parser.parse_args()
