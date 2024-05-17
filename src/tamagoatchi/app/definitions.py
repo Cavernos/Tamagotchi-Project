@@ -3,7 +3,8 @@
 import os
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-LOGGING_LEVEL = 'production'
+ROOT_SIZE = (1024, 576)
+LOGGING_LEVEL = 'development'
 
 
 # Tamagotchi
