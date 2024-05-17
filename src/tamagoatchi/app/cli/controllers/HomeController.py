@@ -1,3 +1,5 @@
+import json
+
 from tamagoatchi.lib.communication import Response, Request, ResponseType
 from tamagoatchi.lib.controller import Controller
 from tamagoatchi.lib.view import ConsoleView

@@ -34,8 +34,13 @@ class SuperFormatter(string.Formatter):
         else:
             return super(SuperFormatter, self).format_field(value, spec)
 
+class View:
+    def __init__(self, path: str) -> None:
+        self.path = path
 
-class ConsoleView:
+    def render(self):
+        pass
+class ConsoleView(View):
     """
     Class used to represent ConsoleView
     """
@@ -43,7 +48,7 @@ class ConsoleView:
         """
         Function search the view and get all text
         """
-        self.path = path
+        super().__init__(path)
         self.qualified_path_name = ROOT_DIR + '\\cli\\views\\' + path + '.txt'
         self.inputs = {}
         self.objects = objects

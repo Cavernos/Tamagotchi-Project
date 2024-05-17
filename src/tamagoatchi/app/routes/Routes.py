@@ -9,7 +9,7 @@ class RouteBuilder:
         self.controller = controller
 
 
-def get_routes() -> dict:
+def get_cli_routes() -> dict:
     """
     Return the different route use for our app
     """
@@ -24,4 +24,9 @@ def get_routes() -> dict:
             'personalization': RouteBuilder(controller='GamePersonalizeController.show_personalization'),
             'personalization.player': RouteBuilder(controller='GamePersonalizeController.new_player'),
             'personalization.tamagotchi': RouteBuilder(controller='GamePersonalizeController.new_tamagotchis')
+    }
+
+def get_gui_routes() -> dict:
+    return {
+        '': RouteBuilder(controller='HomeController')
     }

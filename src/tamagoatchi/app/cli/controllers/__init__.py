@@ -1,6 +1,6 @@
-from tamagoatchi.app.controllers.cli.HomeController import *
-from tamagoatchi.app.controllers.cli.GameController import *
-from tamagoatchi.app.controllers.cli.GamePersonalizeController import *
+from tamagoatchi.app.cli.controllers.HomeController import *
+from tamagoatchi.app.cli.controllers.GameController import *
+from tamagoatchi.app.cli.controllers.GamePersonalizeController import *
 
 # Dictionary of called controllers
 __calledControllers = {}
