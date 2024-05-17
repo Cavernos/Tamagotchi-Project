@@ -7,6 +7,9 @@ from tamagoatchi.app.definitions import ROOT_DIR
 
 
 class SuperFormatter(string.Formatter):
+    """
+    Class used to format strings
+    """
     def __init__(self, default='') -> None:
         self.default = default
 
@@ -17,6 +20,9 @@ class SuperFormatter(string.Formatter):
             return string.Formatter.get_value(key, args, kwds)
 
     def format_field(self, value, spec: str) -> Any:
+        """
+        Function to format loops or callable when string is in brackets
+        """
         if spec == 'call':
             return value()
         if spec.startswith('repeat'):
@@ -29,8 +35,14 @@ class SuperFormatter(string.Formatter):
             return super(SuperFormatter, self).format_field(value, spec)
 
 
-class View:
+class ConsoleView:
+    """
+    Class used to represent ConsoleView
+    """
     def __init__(self, path: str, objects: dict, ext_dict: dict) -> None:
+        """
+        Function search the view and get all text
+        """
         self.path = path
         self.qualified_path_name = ROOT_DIR + '\\views\\' + path + '.txt'
         self.inputs = {}
@@ -42,6 +54,9 @@ class View:
             self.parse(objects)
 
     def compile(self) -> None:
+        """
+        Function to compile the view and search if there's not error in view language
+        """
         open_brackets = 0
         line_count = 1
         for line in self.__content.split('\n'):
@@ -61,10 +76,16 @@ class View:
                             self.qualified_path_name + ':' + str(line_count))
 
     def ObjectMappingLayer(self, objects: dict = None) -> None:
+        """
+        Function that format the strings
+        """
         super_formater = SuperFormatter()
         self.__content = super_formater.format(self.__content, **objects)
 
     def langParser(self) -> int:
+        """
+        Function that create our own language in views
+        """
         input_dict = {}
         skip_if = False
         for line in self.__content.split('\n'):
@@ -150,11 +171,17 @@ class View:
         return 0
 
     def render(self) -> int:
+        """
+        Rendering the view in function of langParser return
+        """
         return_val = self.langParser()
         if return_val == 1:
             self.render()
         return return_val
 
     def parse(self, objects) -> str:
+        """
+        Used to parsing for objects
+        """
         self.ObjectMappingLayer(objects)
         return self.__content
