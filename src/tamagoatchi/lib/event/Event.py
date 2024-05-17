@@ -20,17 +20,17 @@ class Event:
 
 
 class EventHandler:
-    __observers: List[Observer]
+    targets: dict = {}
 
-    def __init__(self) -> None:
-        self.__observers = []
+    @staticmethod
+    def register(type):
+        def decorator(fn):
+            EventHandler.targets.setdefault(type, []).append(fn)
 
-    def dispatch(self, event: Event) -> None:
-        for observer in self.__observers:
-            observer.notify(event)
+        return decorator
 
-    def add_to_subscription(self, observer: Observer) -> None:
-        self.__observers.append(observer)
-
-    def cancel_subscription(self, observer: Observer) -> None:
-        self.__observers.remove(observer)
+    @staticmethod
+    def notify(event):
+        fnl = EventHandler.targets[event.type] if event.type in EventHandler.targets else []
+        for fn in fnl:
+            fn(event)

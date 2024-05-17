@@ -1,1 +1,1 @@
-from tamagoatchi.app.gui.views.TamgotchiView import *
+from tamagoatchi.app.gui.views.MenuView import *

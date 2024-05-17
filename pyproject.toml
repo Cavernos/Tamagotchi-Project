@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tamgotchi-game"
 version = "0.1"
-dependencies=["keyboard", "pygame", "pyyaml"]
+dependencies=["keyboard", "pygame", "pyyaml", "pytmx", "pyscroll>=2.06"]
 requires-python = ">= 3.12"
 description = "Tamagotchi game is Isep's student coding project, it consist to play with 5 tamagotchi and not kill them."
 authors = [
@@ -19,6 +19,7 @@ license = {file = "LICENSE"}
 
 [project.urls]
 Repository = "https://github.com/Cavernos/Tamagotchi-Project.git"
+
 
 [project.optional-dependencies]
 dev = [

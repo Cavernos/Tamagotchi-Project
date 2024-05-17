@@ -4,6 +4,7 @@ import string
 from typing import Any
 
 from tamagoatchi.app.definitions import ROOT_DIR
+from tamagoatchi.lib.handlers import ResourceHandler
 
 
 class SuperFormatter(string.Formatter):
@@ -49,7 +50,7 @@ class ConsoleView(View):
         Function search the view and get all text
         """
         super().__init__(path)
-        self.qualified_path_name = ROOT_DIR + '\\cli\\views\\' + path + '.txt'
+        self.qualified_path_name = str(ROOT_DIR) + '\\cli\\views\\' + path + '.txt'
         self.inputs = {}
         self.objects = objects
         with open(self.qualified_path_name, 'r') as file:
@@ -190,3 +191,7 @@ class ConsoleView(View):
         """
         self.ObjectMappingLayer(objects)
         return self.__content
+
+class GUIView:
+    def __init__(self) -> None:
+        self.view_location = ResourceHandler.get_resources_location() + 2* f'\\{type(self).__name__.split('View')[0].lower()}' + '.tmx'
