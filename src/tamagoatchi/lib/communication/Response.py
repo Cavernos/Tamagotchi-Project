@@ -1,6 +1,6 @@
 import enum
 
-from tamagoatchi.lib.view import View
+from tamagoatchi.lib.view import View, GUIView
 
 
 class ResponseType(enum.Enum):
@@ -23,6 +23,6 @@ class Response:
     view: View
     A view
     """
-    def __init__(self, response_type: ResponseType, view: View) -> None:
+    def __init__(self, response_type: ResponseType, view: View | GUIView) -> None:
         self.response_type = response_type
         self.view = view

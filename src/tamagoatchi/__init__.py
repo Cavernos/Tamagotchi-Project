@@ -1,4 +1,6 @@
 import logging.config
+
+import pyscroll
 import yaml
 
 from . import lib
@@ -14,3 +16,4 @@ logging.config.dictConfig(config)
 
 # Get a Logger Object
 logger = logging.getLogger(LOGGING_LEVEL)
+pyscroll.orthographic.log = logger

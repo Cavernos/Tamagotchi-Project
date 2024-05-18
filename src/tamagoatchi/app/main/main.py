@@ -3,7 +3,6 @@ from os import system
 import pygame, optparse
 
 from tamagoatchi.app.definitions import ROOT_SIZE
-from tamagoatchi.app.gui.views import MenuView
 from tamagoatchi.lib.event import EventHandler
 from tamagoatchi.lib.handlers import ResourceHandler
 from tamagoatchi.lib.view import ViewHandler
@@ -23,19 +22,23 @@ def main_cli():
 
 def main_gui():
     pygame.init()
-    screen = pygame.display.set_mode(ROOT_SIZE)
-    icon = pygame.image.load(ResourceHandler.get_resources_location() + '\\tamagotchis\\default.png')
+    pygame.display.set_mode(ROOT_SIZE, pygame.RESIZABLE)
+    icon_path = ResourceHandler.get_resources_location() + '\\tamagotchis\\default.png'
+    icon = pygame.image.load(icon_path)
     pygame.display.set_icon(icon)
     pygame.display.set_caption('TamaGOATchi')
     running = True
-
+    view_handler = ViewHandler()
     while running:
         for event in pygame.event.get():
             EventHandler.notify(event)
-        MenuView(screen).render()
+        if view_handler.render() == -1:
+            break
+        view_handler.update()
         pygame.display.flip()
 
-#Temporary
+
+# Temporary
 @EventHandler.register(pygame.QUIT)
 def onQuit(event):
     pygame.quit()
