@@ -34,7 +34,7 @@ def main_gui():
             break
         view_handler.update()
         for event in pygame.event.get():
-            EventHandler.notify(event)
+            EventHandler.notify(view_handler.current_view, event)
         pygame.display.flip()
 
 
