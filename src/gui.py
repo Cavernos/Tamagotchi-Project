@@ -20,9 +20,9 @@ class Gui:
         self.clock = Clock("console_game", self.event)
         self.player = Player("John") 
         
-        self.ratio = 9 / 16
-        self.width = 1024
-        self.height = int(self.width * self.ratio)
+        self.ratio = 16 / 9
+        self.height = 576
+        self.width = int(self.height * self.ratio)
         self.zoom = 4
 
         # screen
@@ -45,24 +45,26 @@ class Gui:
                 print(event)
                 if event.type == pygame.QUIT:
                     in_game = False
-                if event.type == pygame.VIDEORESIZE:
+                elif event.type == pygame.VIDEORESIZE:
                     self.resize_window(event)
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE and self.display == "view_all_tamagotchis" or self.display == "view_tamagotchi":
+                        self.esc()
                 for button in self.buttons:
                     if button.is_clicked(event):
-                        if button.action == "quit":
-                            pygame.quit()
-                        if button.action == "settings":
+                        if button.action == "menu":
                             self.menu()
-                        if button.action == "new_game":
+                        elif button.action == "new_game":
                             self.view_all_tamagotchis()
-
+                        elif button.action == "quit":
+                            pygame.quit()
 
             pygame.display.flip()
         pygame.quit()
 
     def menu(self):
         self.display = "menu"
-        self.map = pytmx.util_pygame.load_pygame('./assets/menu/menu.tmx')
+        self.map = pytmx.util_pygame.load_pygame(f'./assets/menu/menu.tmx')
         self.map_data = pyscroll.data.TiledMapData(self.map)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(self.map_data, self.screen.get_size())
         self.map_layer.zoom = self.zoom
@@ -73,22 +75,35 @@ class Gui:
         self.buttons = [Button(self, "new_game", self.zoom*92, self.zoom*87, self.zoom*74, self.zoom*7),
                         Button(self, "quit", self.zoom*95, self.zoom*124, self.zoom*66, self.zoom*7)]
 
-    def setting(self):
-        ...
+    def esc(self):
+        self.display = "esc"
+        self.map = pytmx.util_pygame.load_pygame(f'./assets/esc/esc.tmx')
+        self.map_data = pyscroll.data.TiledMapData(self.map)
+        self.map_layer = pyscroll.orthographic.BufferedRenderer(self.map_data, self.screen.get_size())
+        self.map_layer.zoom = self.zoom
+
+        self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
+        self.group.draw(self.screen)
+
+        self.buttons = [Button(self, "esc", self.zoom*101, self.zoom*42, self.zoom*53, self.zoom*7),
+                        Button(self, "save", self.zoom*99, self.zoom*59, self.zoom*57, self.zoom*7),
+                        Button(self, "menu", self.zoom*92, self.zoom*76, self.zoom*72, self.zoom*7),
+                        Button(self, "quit", self.zoom*95, self.zoom*93, self.zoom*66, self.zoom*7)]
 
     def resize_window(self, event):
-        new_width = event.w
-        new_height = int(new_width * self.ratio)
-        self.zoom = event.w / 256
-        self.map_layer.zoom = self.zoom
+        new_height = event.h
+        new_width = int(new_height * self.ratio)
+        self.zoom = new_height / 144
         pygame.display.set_mode((new_width, new_height), pygame.RESIZABLE)
 
         if self.display == "menu":
             self.menu()
         elif self.display == "view_all_tamagotchis":
             self.view_all_tamagotchis()
+        elif self.display == "esc":
+            self.esc()
         
-    
+
     def view_all_tamagotchis(self):
         self.display = "view_all_tamagotchis"
         self.map = pytmx.util_pygame.load_pygame('./assets/map_maison/map_maison.tmx')
@@ -99,9 +114,13 @@ class Gui:
         self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
         self.group.draw(self.screen)
 
-        self.buttons = [Button(self, "settings", 0, 0, self.zoom*16, self.zoom*16, (70, 70, 70, 128))]
+        self.buttons = [Button(self, "red", self.zoom*101, self.zoom*42, self.zoom*16, self.zoom*16),
+                        Button(self, "yellow", self.zoom*99, self.zoom*59, self.zoom*16, self.zoom*16),
+                        Button(self, "green", self.zoom*92, self.zoom*76, self.zoom*16, self.zoom*16),
+                        Button(self, "blue", self.zoom*95, self.zoom*93, self.zoom*16, self.zoom*16),
+                        Button(self, "pink", self.zoom*95, self.zoom*93, self.zoom*16, self.zoom*16)]
 
-    def view_tamagotchi(self, tamagotchi):
+    def view_tamagotchi(self):
         ...
 
 
