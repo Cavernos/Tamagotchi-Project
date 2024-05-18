@@ -2,9 +2,12 @@ import json
 import logging
 import string
 from typing import Any
+import pyscroll
+import pygame
 
 from tamagoatchi.app.definitions import ROOT_DIR
 from tamagoatchi.lib.handlers import ResourceHandler
+from tamagoatchi.lib.event import EventHandler
 
 
 class SuperFormatter(string.Formatter):
@@ -193,12 +196,26 @@ class ConsoleView(View):
         return self.__content
 
 class GUIView:
-    def __init__(self, ext_dict: dict) -> None:
+    def __init__(self, screen, ext_dict: dict) -> None:
         self.view_location = ResourceHandler.get_resources_location() + 2* f'\\{type(self).__name__.split('View')[0].lower()}' + '.tmx'
         self.header = ext_dict
+        self.screen = screen
+        self.buttons = []
 
-
+    def render(self):
+        pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1).draw(self.screen)
     def redirect(self, location: str) -> int:
          self.header['form_redirect'] = location
          return 0
+
+    @EventHandler.register(pygame.QUIT)
+    def quit(self, event):
+        pygame.quit()
+        exit(0)
+
+    @EventHandler.register(pygame.VIDEORESIZE)
+    def on_resize(self, event):
+        pygame.display.set_mode(event.dict['size'], pygame.RESIZABLE | pygame.HWSURFACE | pygame.DOUBLEBUF)
+        pygame.display.update()
+
 

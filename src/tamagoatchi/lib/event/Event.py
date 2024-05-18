@@ -1,7 +1,5 @@
 import enum
-from typing import List
-
-from tamagoatchi.lib.event import Observer
+from inspect import signature
 
 
 class EventType(enum.Enum):
@@ -24,13 +22,13 @@ class EventHandler:
 
     @staticmethod
     def register(type):
-        def decorator(fn):
-            EventHandler.targets.setdefault(type, []).append(fn)
-
+        def decorator(fn: callable):
+            EventHandler.targets.setdefault(type, {})['m'] = fn
         return decorator
 
     @staticmethod
     def notify(event):
-        fnl = EventHandler.targets[event.type] if event.type in EventHandler.targets else []
-        for fn in fnl:
-            fn(event)
+        fnd = EventHandler.targets[event.type] if event.type in EventHandler.targets else {}
+        for instance, fn in fnd.items():
+            fn(instance, event)
+            # fn(event)
