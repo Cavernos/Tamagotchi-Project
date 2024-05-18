@@ -8,13 +8,12 @@ pygame.init()
 
 # class Button
 class Button:
-    def __init__(self, screen, action, x, y, width, height, color=(255, 0, 0, 0)):
+    def __init__(self, screen, action, x, y, width, height, color=(255, 0, 0, 128)):
         self.action = action
         self.rect = pygame.Rect(x, y, width, height)
         
-        # Créer une surface avec transparence pour le bouton
         self.image = pygame.Surface((width, height), pygame.SRCALPHA)
-        self.image.fill(color)
+        self.image.fill(color)  # (r, g, b, transparency)
         screen.screen.blit(self.image, self.rect.topleft)
 
     def is_clicked(self, event):

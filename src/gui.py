@@ -15,17 +15,18 @@ import tamagotchi
 
 
 class Gui:
-    def __init__(self,
-                 width: int=1024,
-                 height: int=576,
-                 zoom:int = 4):
+    def __init__(self):
         self.event = Event()
         self.clock = Clock("console_game", self.event)
         self.player = Player("John") 
-        self.zoom = zoom
+        
+        self.ratio = 9 / 16
+        self.width = 1024
+        self.height = int(self.width * self.ratio)
+        self.zoom = 4
 
         # screen
-        self.screen = pygame.display.set_mode((width, height))
+        self.screen = pygame.display.set_mode((self.width, self.height), pygame.RESIZABLE)
         pygame.display.set_caption("TamaGOATchi")
         game_icon = pygame.image.load('./assets/tamagotchis/default.png')
         pygame.display.set_icon(game_icon)
@@ -41,8 +42,11 @@ class Gui:
 
             # pygame.event
             for event in pygame.event.get():
+                print(event)
                 if event.type == pygame.QUIT:
                     in_game = False
+                if event.type == pygame.VIDEORESIZE:
+                    self.resize_window(event)
                 for button in self.buttons:
                     if button.is_clicked(event):
                         if button.action == "quit":
@@ -57,6 +61,7 @@ class Gui:
         pygame.quit()
 
     def menu(self):
+        self.display = "menu"
         self.map = pytmx.util_pygame.load_pygame('./assets/menu/menu.tmx')
         self.map_data = pyscroll.data.TiledMapData(self.map)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(self.map_data, self.screen.get_size())
@@ -70,8 +75,22 @@ class Gui:
 
     def setting(self):
         ...
+
+    def resize_window(self, event):
+        new_width = event.w
+        new_height = int(new_width * self.ratio)
+        self.zoom = event.w / 256
+        self.map_layer.zoom = self.zoom
+        pygame.display.set_mode((new_width, new_height), pygame.RESIZABLE)
+
+        if self.display == "menu":
+            self.menu()
+        elif self.display == "view_all_tamagotchis":
+            self.view_all_tamagotchis()
+        
     
     def view_all_tamagotchis(self):
+        self.display = "view_all_tamagotchis"
         self.map = pytmx.util_pygame.load_pygame('./assets/map_maison/map_maison.tmx')
         self.map_data = pyscroll.data.TiledMapData(self.map)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(self.map_data, self.screen.get_size())
