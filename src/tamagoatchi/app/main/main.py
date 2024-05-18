@@ -30,19 +30,12 @@ def main_gui():
     running = True
     view_handler = ViewHandler()
     while running:
-        for event in pygame.event.get():
-            EventHandler.notify(event)
         if view_handler.render() == -1:
             break
         view_handler.update()
+        for event in pygame.event.get():
+            EventHandler.notify(event)
         pygame.display.flip()
-
-
-# Temporary
-@EventHandler.register(pygame.QUIT)
-def onQuit(event):
-    pygame.quit()
-    exit(0)
 
 
 if __name__ == '__main__':

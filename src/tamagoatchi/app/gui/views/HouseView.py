@@ -1,22 +1,18 @@
 import pygame
-import pytmx
 import pyscroll
 from pygame import Surface, SurfaceType
+import pytmx
 
 from tamagoatchi.app.definitions import MAP_SIZE
 from tamagoatchi.lib.view import GUIView
 from tamagoatchi.lib.widgets import Button
 
 
-class MenuView(GUIView):
+class HouseView(GUIView):
     def __init__(self, screen: Surface | SurfaceType, ext_dict: dict):
         super().__init__(screen, ext_dict)
         map = pytmx.util_pygame.load_pygame(self.view_location)
         zoom = screen.get_size()[0] / MAP_SIZE[0]
-        self.buttons = [Button(screen, self.new_game, zoom * 92, zoom * 87, zoom * 74, zoom * 7)]
         map_data = pyscroll.TiledMapData(map)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(map_data, pygame.display.get_window_size())
         self.map_layer.zoom = zoom
-
-    def new_game(self):
-        self.redirect('home')
