@@ -205,8 +205,10 @@ class GUIView:
     def render(self):
         pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1).draw(self.screen)
     def redirect(self, location: str) -> int:
-         self.header['form_redirect'] = location
-         return 0
+        for button in self.buttons:
+            button.destroy()
+        self.header['form_redirect'] = location
+        return 0
 
     @EventHandler.register(pygame.QUIT)
     def quit(self, event):
