@@ -193,5 +193,12 @@ class ConsoleView(View):
         return self.__content
 
 class GUIView:
-    def __init__(self) -> None:
+    def __init__(self, ext_dict: dict) -> None:
         self.view_location = ResourceHandler.get_resources_location() + 2* f'\\{type(self).__name__.split('View')[0].lower()}' + '.tmx'
+        self.header = ext_dict
+
+
+    def redirect(self, location: str) -> int:
+         self.header['form_redirect'] = location
+         return 0
+

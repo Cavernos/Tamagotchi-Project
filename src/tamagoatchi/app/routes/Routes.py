@@ -2,6 +2,7 @@ class RouteBuilder:
     """
     A class used to create some Routes
     """
+
     def __init__(self, controller: str) -> None:
         """
         Controller.method
@@ -14,8 +15,8 @@ def get_cli_routes() -> dict:
     Return the different route use for our app
     """
     return {
-            '': RouteBuilder(controller='HomeController.show_home'),
-            'home.exit': RouteBuilder(controller='HomeController.exit'),
+        '': RouteBuilder(controller='HomeController.show_home'),
+        'home.exit': RouteBuilder(controller='HomeController.exit'),
 
             'game.start': RouteBuilder(controller='GameController.game'),
             'game.load': RouteBuilder(controller='GameController.load'),
@@ -30,7 +31,8 @@ def get_cli_routes() -> dict:
             'save': RouteBuilder(controller='SaveController.save'),
     }
 
+
 def get_gui_routes() -> dict:
     return {
-        '': RouteBuilder(controller='HomeController')
+        '': RouteBuilder(controller='HomeController.show_home')
     }

@@ -4,9 +4,10 @@ import pathlib
 import os
 
 ROOT_DIR = pathlib.Path(os.path.dirname(__file__))
+MAP_SIZE = (256, 144)
 ROOT_SIZE = (1024, 576)
-LOGGING_LEVEL = 'development'
-
+RATIO = 16 / 9
+LOGGING_LEVEL = 'staging'
 
 # Tamagotchi
 NUMBER_OF_TAMAGOTCHI = 5  # Represent the number of tamagotchi at start
