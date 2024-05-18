@@ -6,7 +6,7 @@ import pygame
 
 # class Button
 class Button:
-    def __init__(self, game, action, x, y, width, height, color=(255, 0, 0, 128)):
+    def __init__(self, game, action, x, y, width, height, color=(255, 0, 0, 0)):
         self.action = action
         self.rect = pygame.Rect(x, y, width, height)
         
