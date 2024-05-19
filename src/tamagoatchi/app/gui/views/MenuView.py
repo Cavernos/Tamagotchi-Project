@@ -13,8 +13,8 @@ class MenuView(GUIView):
         super().__init__(screen, ext_dict)
         map = pytmx.util_pygame.load_pygame(self.view_location)
         zoom = screen.get_size()[0] / MAP_SIZE[0]
-        self.buttons = [Button(screen, self.new_game, zoom * 92, zoom * 87, zoom * 74, zoom * 7),
-                        Button(screen, self.exit, zoom*95, zoom*124, zoom*66, zoom*7)]
+        self.buttons.append(Button(screen, self.new_game, zoom * 92, zoom * 87, zoom * 74, zoom * 7))
+        self.buttons.append(Button(screen, self.exit, zoom * 95, zoom * 124, zoom * 66, zoom * 7))
         for button in self.buttons:
             button.draw()
         map_data = pyscroll.TiledMapData(map)
@@ -28,5 +28,3 @@ class MenuView(GUIView):
     def exit():
         pygame.quit()
         exit(0)
-
-

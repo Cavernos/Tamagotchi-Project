@@ -7,13 +7,14 @@ import pygame
 
 from tamagoatchi.app.definitions import ROOT_DIR
 from tamagoatchi.lib.handlers import ResourceHandler
-from tamagoatchi.lib.event import EventHandler
+from tamagoatchi.lib.event import EventManager
 
 
 class SuperFormatter(string.Formatter):
     """
     Class used to format strings
     """
+
     def __init__(self, default='') -> None:
         self.default = default
 
@@ -38,16 +39,20 @@ class SuperFormatter(string.Formatter):
         else:
             return super(SuperFormatter, self).format_field(value, spec)
 
+
 class View:
     def __init__(self, path: str) -> None:
         self.path = path
 
     def render(self):
         pass
+
+
 class ConsoleView(View):
     """
     Class used to represent ConsoleView
     """
+
     def __init__(self, path: str, objects: dict, ext_dict: dict) -> None:
         """
         Function search the view and get all text
@@ -195,29 +200,30 @@ class ConsoleView(View):
         self.ObjectMappingLayer(objects)
         return self.__content
 
+
 class GUIView:
     def __init__(self, screen, ext_dict: dict) -> None:
-        self.view_location = ResourceHandler.get_resources_location() + 2* f'\\{type(self).__name__.split('View')[0].lower()}' + '.tmx'
+        self.map_layer = None
+        self.view_location = ResourceHandler.get_resources_location() + 2 * f'\\{type(self).__name__.split('View')[0].lower()}' + '.tmx'
         self.header = ext_dict
         self.screen = screen
         self.buttons = []
+        self.event_manager = EventManager.from_id("View Manager")
+        self.event_manager.register(pygame.QUIT, self.quit)
+        self.event_manager.register(pygame.VIDEORESIZE, self.on_resize)
 
     def render(self):
         pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1).draw(self.screen)
-    def redirect(self, location: str) -> int:
+
+    def redirect(self, location: str):
         for button in self.buttons:
             button.destroy()
+            del button
         self.header['form_redirect'] = location
-        return 0
 
-    @EventHandler.register(pygame.QUIT)
     def quit(self, event):
         pygame.quit()
         exit(0)
 
-    @EventHandler.register(pygame.VIDEORESIZE)
     def on_resize(self, event):
         pygame.display.set_mode(event.dict['size'], pygame.RESIZABLE | pygame.HWSURFACE | pygame.DOUBLEBUF)
-        pygame.display.update()
-
-
