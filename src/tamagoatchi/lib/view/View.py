@@ -208,20 +208,29 @@ class GUIView:
         self.header = ext_dict
         self.screen = screen
         self.buttons = []
-        self.event_manager = EventManager.from_id("View Manager")
-        self.event_manager.register(pygame.QUIT, self.quit)
-        self.event_manager.register(pygame.VIDEORESIZE, self.on_resize)
+        self.event_managers = {"View Manager": EventManager.from_id("View Manager")}
+
+        self.event_managers['View Manager'].register(pygame.QUIT, self.quit)
+        self.event_managers['View Manager'].register(pygame.VIDEORESIZE, self.on_resize)
 
     def render(self):
         pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1).draw(self.screen)
 
     def redirect(self, location: str):
+        self.deregister_events()
         for button in self.buttons:
             button.destroy()
             del button
         self.header['form_redirect'] = location
 
-    def quit(self, event):
+    def deregister_events(self):
+        for key, value in self.event_managers.items():
+            if key == "View Manager":
+                value.deregister(pygame.QUIT, self.quit)
+                value.deregister(pygame.VIDEORESIZE, self.on_resize)
+
+    @staticmethod
+    def quit():
         pygame.quit()
         exit(0)
 

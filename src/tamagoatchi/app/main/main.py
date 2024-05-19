@@ -36,6 +36,7 @@ def main_gui():
         for event in pygame.event.get():
             EventManager.from_id("Button Manager").notify(event)
             EventManager.from_id("View Manager").notify(event)
+            EventManager.from_id("Key Manager").notify(event)
         pygame.display.flip()
 
 
