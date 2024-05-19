@@ -3,7 +3,7 @@ from os import system
 import pygame, optparse
 
 from tamagoatchi.app.definitions import ROOT_SIZE
-from tamagoatchi.lib.event import EventHandler
+from tamagoatchi.lib.event import EventHandler, EventManager
 from tamagoatchi.lib.handlers import ResourceHandler
 from tamagoatchi.lib.view import ViewHandler
 
@@ -34,7 +34,8 @@ def main_gui():
             break
         view_handler.update()
         for event in pygame.event.get():
-            EventHandler.notify(view_handler.current_view, event)
+            EventManager.from_id("Button Manager").notify(event)
+            EventManager.from_id("View Manager").notify(event)
         pygame.display.flip()
 
 

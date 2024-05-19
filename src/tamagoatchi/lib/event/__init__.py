@@ -1,5 +1,7 @@
 from tamagoatchi.lib.event.Event import *
+from tamagoatchi.lib.event.EventHandler import *
 from tamagoatchi.lib.event.Observer import *
+from tamagoatchi.lib.event.EventManager import *
 
 __event_handler_instance = None
 
