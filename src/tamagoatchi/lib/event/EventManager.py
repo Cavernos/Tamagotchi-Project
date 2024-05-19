@@ -25,7 +25,7 @@ class EventManager:
     def deregister(self, event_type: int, handler: EventHandler):
         if handler in self.handlers[event_type]:
             logger.info(f"{self.name} deregistered {event_type}")
-            self.handlers[event_type].remove(handler)
+            del self.handlers[event_type]
 
     @classmethod
     def from_id(cls, _id: str):

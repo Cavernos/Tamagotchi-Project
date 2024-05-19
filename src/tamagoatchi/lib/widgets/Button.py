@@ -26,17 +26,16 @@ class Button:
     def on_click(self, event):
         if self.rect.collidepoint(event.pos):
             self.action()
+        return
 
     def on_hover(self, event):
-        x, y = event.pos
-        if (x in range(self.rect.x, self.rect.x + self.rect.width)) and (
-                y in range(self.rect.y, self.rect.y + self.rect.height)):
+        pos = event.pos
+        if self.rect.collidepoint(pos):
             pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
-        elif not (x in range(self.rect.x, self.rect.x + self.rect.width)) and not (
-                y in range(self.rect.y, self.rect.y + self.rect.height)):
+        else:
             pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
+        return
 
     def destroy(self):
-        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
         self.event_manager.deregister(pygame.MOUSEMOTION, self.on_hover)
         self.event_manager.deregister(pygame.MOUSEBUTTONDOWN, self.on_click)
