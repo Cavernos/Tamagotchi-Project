@@ -1,6 +1,6 @@
 import pygame.display
 
-from tamagoatchi.app.gui.controllers.TamagotchiView import TamagotchiView
+from tamagoatchi.app.gui.views.TamagotchiView import TamagotchiView
 from tamagoatchi.app.gui.views.HouseView import HouseView
 from tamagoatchi.lib.communication import Request, Response, ResponseType
 
@@ -13,5 +13,5 @@ class GameController:
 
     @staticmethod
     def view_tamagotchi(request: Request) -> Response:
-        view = TamagotchiView(pygame.display.get_surface(), request.json['ext'], request.json)
+        view = TamagotchiView(pygame.display.get_surface(), request.json['ext']['click_pos'], request.json)
         return Response(ResponseType.valid, view)
