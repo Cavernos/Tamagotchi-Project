@@ -2,7 +2,7 @@ from os import system
 
 import pygame, optparse
 
-from tamagoatchi.app.definitions import ROOT_SIZE
+from tamagoatchi.app.definitions import ROOT_SIZE, GUI_EXECUTION
 from tamagoatchi.lib.event import EventHandler, EventManager
 from tamagoatchi.lib.handlers import ResourceHandler
 from tamagoatchi.lib.view import ViewHandler
@@ -41,11 +41,11 @@ def main_gui():
 
 
 if __name__ == '__main__':
-    main_gui()
-    option_parser = optparse.OptionParser()
-    option_parser.add_option('-g', dest="gui", action='store_true')
-    (options, args) = option_parser.parse_args()
-    if options.gui:
+    if GUI_EXECUTION:
         main_gui()
     else:
         main_cli()
+    option_parser = optparse.OptionParser()
+    option_parser.add_option('-g', dest="gui", action='store_true')
+    (options, args) = option_parser.parse_args()
+    GUI_EXECUTION = options.gui

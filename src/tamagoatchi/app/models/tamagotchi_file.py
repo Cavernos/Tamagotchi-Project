@@ -5,12 +5,12 @@ import random
 
 from tamagoatchi import logger
 from tamagoatchi.app.definitions import NUMBER_OF_TAMAGOTCHI, NOT_PRINTABLE_KEYS, CARACTERISTICS_INITIAL_VALUE, \
-    DAY_DURATION
+    DAY_DURATION, MAP_SIZE
 
 # Lists of Tamagotchis
 tamagotchis = [
     {
-        "name": "Michel",
+        "name": f"Michel {i + 1}",
         "hunger": CARACTERISTICS_INITIAL_VALUE,
         "health": CARACTERISTICS_INITIAL_VALUE,
         "boredom": CARACTERISTICS_INITIAL_VALUE,
@@ -20,6 +20,11 @@ tamagotchis = [
     }
     for i in range(NUMBER_OF_TAMAGOTCHI)
 ]
+tamagotchis[0]['position'] = (48, 48)
+tamagotchis[1]['position'] = (48, 112)
+tamagotchis[2]['position'] = (144, 112)
+tamagotchis[3]['position'] = (192, 96)
+tamagotchis[4]['position'] = (208, 48)
 
 
 def eat(tamagotchi: dict) -> None:

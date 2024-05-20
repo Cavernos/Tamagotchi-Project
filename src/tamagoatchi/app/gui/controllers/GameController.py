@@ -12,6 +12,6 @@ class GameController:
         return Response(ResponseType.valid, view)
 
     @staticmethod
-    def view_red_tamagotchi(request: Request) -> Response:
-        view = TamagotchiView(pygame.display.get_surface(), "red", request.json)
+    def view_tamagotchi(request: Request) -> Response:
+        view = TamagotchiView(pygame.display.get_surface(), request.json['ext'], request.json)
         return Response(ResponseType.valid, view)

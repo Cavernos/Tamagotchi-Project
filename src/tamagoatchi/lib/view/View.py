@@ -217,7 +217,8 @@ class GUIView:
         self.map_layer.zoom = self.zoom
         self.buttons = []
 
-        self.event_managers = {"View Manager": EventManager.from_id("View Manager"), "Key Manager": EventManager.from_id("Key Manager")}
+        self.event_managers = {"View Manager": EventManager.from_id("View Manager"),
+                               "Key Manager": EventManager.from_id("Key Manager")}
         self.event_managers["Key Manager"].register(pygame.KEYDOWN, self.on_key_pressed)
         self.event_managers['View Manager'].register(pygame.QUIT, self.quit)
         self.event_managers['View Manager'].register(pygame.VIDEORESIZE, self.on_resize)
@@ -225,11 +226,13 @@ class GUIView:
     def render(self):
         pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1).draw(self.screen)
 
-    def redirect(self, location: str):
+    def redirect(self, location: str, header=None):
         self.deregister_events()
         for button in self.buttons:
             button.destroy()
         self.header['form_redirect'] = location
+        if header is not None:
+            self.header['ext'] = [header]
 
     def deregister_events(self):
         for key, value in self.event_managers.items():
@@ -238,7 +241,6 @@ class GUIView:
                 value.deregister(pygame.VIDEORESIZE, self.on_resize)
             if key == "Key Manager":
                 value.deregister(pygame.KEYDOWN, self.on_key_pressed)
-
 
     @staticmethod
     def quit(event):
