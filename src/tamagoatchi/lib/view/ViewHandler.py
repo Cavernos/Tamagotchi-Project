@@ -1,7 +1,6 @@
-import pygame
+
 
 from tamagoatchi.lib.communication import Request, Response, get_router
-from tamagoatchi.lib.event import EventHandler
 from tamagoatchi.lib.view import View
 
 
