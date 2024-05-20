@@ -18,8 +18,6 @@ class Button:
         self.rect = pygame.Rect(x, y, width, height)
         self.screen = screen
         self.image = pygame.Surface((width, height), pygame.SRCALPHA)
-
-    def draw(self):
         self.image.fill(self.color)  # (r, g, b, transparency)
         self.screen.blit(self.image, self.rect.topleft)
 

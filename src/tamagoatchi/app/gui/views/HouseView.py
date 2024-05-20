@@ -14,10 +14,10 @@ from tamagoatchi.lib.widgets import Button
 class HouseView(GUIView):
     def __init__(self, screen: Surface | SurfaceType, ext_dict: dict):
         super().__init__(screen, ext_dict)
-        for tamagotchi in tamagotchis:
-            self.buttons.append(Button(self, self.view_tamagotchi,
-                                       self.zoom*tamagotchi['position'][0],
-                                       self.zoom*tamagotchi['position'][1], self.zoom*16, self.zoom*16))
+        for layer in self.map.objectgroups:
+            for obj in layer:
+                self.buttons.append(Button(screen, self.view_tamagotchi, self.zoom * obj.x,
+                                           self.zoom * obj.y, self.zoom * obj.width, self.zoom * obj.height))
 
     def on_key_pressed(self, event):
         super().on_key_pressed(event)
@@ -26,5 +26,5 @@ class HouseView(GUIView):
         return
 
     def view_tamagotchi(self, event):
-        self.redirect('game.tamagotchi', event.pos)
+        self.redirect('game.tamagotchi', click_pos=event.pos)
         return
