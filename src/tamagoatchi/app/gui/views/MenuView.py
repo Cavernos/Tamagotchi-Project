@@ -21,5 +21,5 @@ class MenuView(GUIView):
         self.map_layer = pyscroll.orthographic.BufferedRenderer(map_data, pygame.display.get_window_size())
         self.map_layer.zoom = zoom
 
-    def new_game(self):
+    def new_game(self, event):
         self.redirect('home')

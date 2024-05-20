@@ -18,16 +18,21 @@ class HouseView(GUIView):
         map_data = pyscroll.TiledMapData(map)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(map_data, pygame.display.get_window_size())
         self.map_layer.zoom = zoom
+        self.buttons.append(Button(self, self.view_tamagotchi_red, zoom*48, zoom*48, zoom*16, zoom*16))
         self.event_managers["Key Manager"] = EventManager.from_id("Key Manager")
-        self.event_managers["Key Manager"].register(pygame.KEYDOWN, self.escape_menu)
+        self.event_managers["Key Manager"].register(pygame.KEYDOWN, self.on_key_pressed)
 
-    def escape_menu(self, event):
+    def on_key_pressed(self, event):
         if event.key == pygame.K_ESCAPE:
             self.redirect('')
+        return
+
+    def view_tamagotchi_red(self, event):
+        self.redirect('game.red_tamagotchi')
         return
 
     def deregister_events(self):
         super().deregister_events()
         for key, value in self.event_managers.items():
             if key == "Key Manager":
-                value.deregister(pygame.KEYDOWN, self.escape_menu)
+                value.deregister(pygame.KEYDOWN, self.on_key_pressed)

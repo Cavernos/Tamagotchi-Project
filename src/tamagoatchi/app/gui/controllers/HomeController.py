@@ -11,8 +11,3 @@ class HomeController:
     def show_home(request: Request) -> Response:
         view = MenuView(pygame.display.get_surface(), request.json)
         return Response(ResponseType.valid, view)
-
-    @staticmethod
-    def test(request: Request) -> Response:
-        view = HouseView(pygame.display.get_surface(), request.json)
-        return Response(ResponseType.valid, view)
