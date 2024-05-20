@@ -6,7 +6,7 @@ import pyscroll
 import pygame
 import pytmx
 
-from tamagoatchi.app.definitions import ROOT_DIR, MAP_SIZE
+from tamagoatchi.app.definitions import ROOT_DIR, MAP_SIZE, RATIO
 from tamagoatchi.lib.handlers import ResourceHandler
 from tamagoatchi.lib.event import EventManager
 
@@ -213,26 +213,26 @@ class GUIView:
         self.map = pytmx.util_pygame.load_pygame(self.view_location)
         self.map_data = pyscroll.TiledMapData(self.map)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(self.map_data, pygame.display.get_window_size())
-        self.zoom = screen.get_size()[0] / MAP_SIZE[0]
+        self.zoom = int(self.screen.get_height()) / (self.map.height * self.map.tilewidth)
         self.map_layer.zoom = self.zoom
         self.buttons = []
-
         self.event_managers = {"View Manager": EventManager.from_id("View Manager"),
                                "Key Manager": EventManager.from_id("Key Manager")}
         self.event_managers["Key Manager"].register(pygame.KEYDOWN, self.on_key_pressed)
         self.event_managers['View Manager'].register(pygame.QUIT, self.quit)
         self.event_managers['View Manager'].register(pygame.VIDEORESIZE, self.on_resize)
+        self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
 
     def render(self):
-        pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1).draw(self.screen)
+        self.group.draw(self.screen)
 
-    def redirect(self, location: str, header=None):
+    def redirect(self, location: str, **header):
         self.deregister_events()
         for button in self.buttons:
             button.destroy()
         self.header['form_redirect'] = location
         if header is not None:
-            self.header['ext'] = [header]
+            self.header['ext'] = header
 
     def deregister_events(self):
         for key, value in self.event_managers.items():

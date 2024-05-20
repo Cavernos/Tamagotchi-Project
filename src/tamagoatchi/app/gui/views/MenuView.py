@@ -14,8 +14,6 @@ class MenuView(GUIView):
         zoom = screen.get_size()[0] / MAP_SIZE[0]
         self.buttons.append(Button(screen, self.new_game, zoom * 92, zoom * 87, zoom * 74, zoom * 7))
         self.buttons.append(Button(screen, self.quit, zoom * 95, zoom * 124, zoom * 66, zoom * 7))
-        for button in self.buttons:
-            button.draw()
         self.map_layer.zoom = zoom
 
     def new_game(self, event):

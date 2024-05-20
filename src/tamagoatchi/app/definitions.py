@@ -4,7 +4,7 @@ import pathlib
 import os
 
 ROOT_DIR = pathlib.Path(os.path.dirname(__file__))
-GUI_EXECUTION = False
+GUI_EXECUTION = True
 MAP_SIZE = (256, 144)
 ROOT_SIZE = (1024, 576)
 RATIO = 16 / 9
