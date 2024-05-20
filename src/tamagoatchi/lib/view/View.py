@@ -220,7 +220,6 @@ class GUIView:
         self.deregister_events()
         for button in self.buttons:
             button.destroy()
-            del button
         self.header['form_redirect'] = location
 
     def deregister_events(self):
@@ -230,9 +229,10 @@ class GUIView:
                 value.deregister(pygame.VIDEORESIZE, self.on_resize)
 
     @staticmethod
-    def quit():
+    def quit(event):
         pygame.quit()
         exit(0)
 
-    def on_resize(self, event):
+    @staticmethod
+    def on_resize(event):
         pygame.display.set_mode(event.dict['size'], pygame.RESIZABLE | pygame.HWSURFACE | pygame.DOUBLEBUF)
