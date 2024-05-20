@@ -4,8 +4,9 @@ import string
 from typing import Any
 import pyscroll
 import pygame
+import pytmx
 
-from tamagoatchi.app.definitions import ROOT_DIR
+from tamagoatchi.app.definitions import ROOT_DIR, MAP_SIZE
 from tamagoatchi.lib.handlers import ResourceHandler
 from tamagoatchi.lib.event import EventManager
 
@@ -202,14 +203,22 @@ class ConsoleView(View):
 
 
 class GUIView:
+    file_name = ''
+
     def __init__(self, screen, ext_dict: dict) -> None:
-        self.map_layer = None
-        self.view_location = ResourceHandler.get_resources_location() + 2 * f'\\{type(self).__name__.split('View')[0].lower()}' + '.tmx'
+        GUIView.file_name = type(self).__name__.split('View')[0].lower()
+        self.view_location = ResourceHandler.get_resources_location() + 2 * f'\\{type(self).file_name}' + '.tmx'
         self.header = ext_dict
         self.screen = screen
+        self.map = pytmx.util_pygame.load_pygame(self.view_location)
+        self.map_data = pyscroll.TiledMapData(self.map)
+        self.map_layer = pyscroll.orthographic.BufferedRenderer(self.map_data, pygame.display.get_window_size())
+        self.zoom = screen.get_size()[0] / MAP_SIZE[0]
+        self.map_layer.zoom = self.zoom
         self.buttons = []
-        self.event_managers = {"View Manager": EventManager.from_id("View Manager")}
 
+        self.event_managers = {"View Manager": EventManager.from_id("View Manager"), "Key Manager": EventManager.from_id("Key Manager")}
+        self.event_managers["Key Manager"].register(pygame.KEYDOWN, self.on_key_pressed)
         self.event_managers['View Manager'].register(pygame.QUIT, self.quit)
         self.event_managers['View Manager'].register(pygame.VIDEORESIZE, self.on_resize)
 
@@ -227,6 +236,9 @@ class GUIView:
             if key == "View Manager":
                 value.deregister(pygame.QUIT, self.quit)
                 value.deregister(pygame.VIDEORESIZE, self.on_resize)
+            if key == "Key Manager":
+                value.deregister(pygame.KEYDOWN, self.on_key_pressed)
+
 
     @staticmethod
     def quit(event):
@@ -236,3 +248,6 @@ class GUIView:
     @staticmethod
     def on_resize(event):
         pygame.display.set_mode(event.dict['size'], pygame.RESIZABLE | pygame.HWSURFACE | pygame.DOUBLEBUF)
+
+    def on_key_pressed(self, event):
+        pass
