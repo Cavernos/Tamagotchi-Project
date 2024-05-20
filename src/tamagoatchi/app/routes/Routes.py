@@ -1,3 +1,6 @@
+from tamagoatchi.app.definitions import GUI_EXECUTION
+
+
 class RouteBuilder:
     """
     A class used to create some Routes
@@ -10,10 +13,16 @@ class RouteBuilder:
         self.controller = controller
 
 
-def get_cli_routes() -> dict:
+def get_routes() -> dict:
     """
     Return the different route use for our app
     """
+    if GUI_EXECUTION:
+        return {
+            '': RouteBuilder(controller='HomeController.show_home'),
+            'home': RouteBuilder(controller='GameController.start_game'),
+            'game.tamagotchi': RouteBuilder(controller='GameController.view_tamagotchi')
+        }
     return {
         '': RouteBuilder(controller='HomeController.show_home'),
         'home.exit': RouteBuilder(controller='HomeController.exit'),
@@ -29,12 +38,4 @@ def get_cli_routes() -> dict:
             'personalization.tamagotchi': RouteBuilder(controller='GamePersonalizeController.new_tamagotchis'),
 
             'save': RouteBuilder(controller='SaveController.save'),
-    }
-
-
-def get_gui_routes() -> dict:
-    return {
-        '': RouteBuilder(controller='HomeController.show_home'),
-        'home': RouteBuilder(controller='GameController.start_game'),
-        'game.red_tamagotchi': RouteBuilder(controller='GameController.view_red_tamagotchi')
     }
