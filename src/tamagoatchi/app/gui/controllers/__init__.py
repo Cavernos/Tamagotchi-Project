@@ -1,4 +1,5 @@
 from tamagoatchi.app.gui.controllers.HomeController import *
+from tamagoatchi.app.gui.controllers.GameController import *
 # Dictionary of called controllers
 __calledControllers = {}
 

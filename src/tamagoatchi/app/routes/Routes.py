@@ -31,5 +31,6 @@ def get_cli_routes() -> dict:
 def get_gui_routes() -> dict:
     return {
         '': RouteBuilder(controller='HomeController.show_home'),
-        'home': RouteBuilder(controller='HomeController.test')
+        'home': RouteBuilder(controller='GameController.start_game'),
+        'game.red_tamagotchi': RouteBuilder(controller='GameController.view_red_tamagotchi')
     }
