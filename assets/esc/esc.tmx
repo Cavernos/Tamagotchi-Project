@@ -31,10 +31,10 @@
 </data>
  </layer>
  <objectgroup id="3" name="boutons">
-  <object id="1" x="102" y="47" width="53" height="7"/>
-  <object id="2" x="100" y="64" width="57" height="7"/>
-  <object id="3" x="96" y="81" width="67" height="7"/>
-  <object id="4" x="96" y="98" width="66" height="7"/>
-  <object id="5" x="105" y="32" width="46" height="7"/>
+  <object id="1" type="settings" x="102" y="47" width="53" height="7"/>
+  <object id="2" type="save" x="100" y="64" width="57" height="7"/>
+  <object id="3" type="main_menu" x="96" y="81" width="67" height="7"/>
+  <object id="4" type="quit" x="96" y="98" width="66" height="7"/>
+  <object id="5" type="view_all_tamagotchis" x="105" y="32" width="46" height="7"/>
  </objectgroup>
 </map>
