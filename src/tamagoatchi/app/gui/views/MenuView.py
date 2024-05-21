@@ -1,3 +1,5 @@
+import webbrowser
+
 import pygame
 import pytmx
 import pyscroll
@@ -12,9 +14,21 @@ class MenuView(GUIView):
     def __init__(self, screen: Surface | SurfaceType, ext_dict: dict):
         super().__init__(screen, ext_dict)
         zoom = screen.get_size()[0] / MAP_SIZE[0]
-        self.buttons.append(Button(screen, self.new_game, zoom * 92, zoom * 87, zoom * 74, zoom * 7))
-        self.buttons.append(Button(screen, self.quit, zoom * 95, zoom * 124, zoom * 66, zoom * 7))
+        for layer in self.map.objectgroups:
+            for obj in layer:
+                self.buttons.append(Button(screen, getattr(self, obj.type), zoom * obj.x, zoom * obj.y, zoom * obj.width, zoom * obj.height))
         self.map_layer.zoom = zoom
 
     def new_game(self, event):
         self.redirect('home')
+
+    def load_game(self, event):
+        ...
+
+    def settings(self, event):
+        ...
+
+    def credits(self, event):
+        webbrowser.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+        pygame.quit()
+        exit(0)
