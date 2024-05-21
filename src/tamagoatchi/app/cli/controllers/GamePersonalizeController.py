@@ -1,6 +1,6 @@
 from tamagoatchi.app.models import Player
 from tamagoatchi.lib.communication import Response, Request, ResponseType
-from tamagoatchi.lib.view import View
+from tamagoatchi.lib.view import ConsoleView
 from tamagoatchi.app.models import tamagotchis, print_status
 from tamagoatchi.app.definitions import NUMBER_OF_TAMAGOTCHI
 
@@ -30,7 +30,7 @@ class GamePersonalizeController:
         request: Request
         All the information send by the player when he was redirected
         """
-        view = View('personalization',
+        view = ConsoleView('personalization',
                     {"player": Player(), "tamagotchi_status": print_status(), "tamagotchis": tamagotchis
                      }, request.json)
         return Response(ResponseType.valid, view)
@@ -46,7 +46,7 @@ class GamePersonalizeController:
         """
         player_name = request.json['inputs']['playername']
         self.player.name = player_name
-        view = View('personalization',
+        view = ConsoleView('personalization',
                     {'player': self.player,
                      "tamagotchi_status": print_status(),
                      "tamagotchis": tamagotchis}, request.json)
@@ -64,7 +64,7 @@ class GamePersonalizeController:
         tamagotchi_names = request.json['inputs']['tamaname']
         if len(tamagotchi_names) != NUMBER_OF_TAMAGOTCHI:
             return Response(ResponseType.error,
-                            View('personalization', {
+                            ConsoleView('personalization', {
                                 'error': "Il n'y a pas assez de noms pour les tamagotchis",
                                 'player': self.player, 'tamagotchi_status': print_status(),
                                 'tamagotchis': tamagotchis
@@ -73,6 +73,6 @@ class GamePersonalizeController:
                             )
         for tamagotchi in tamagotchis:
             tamagotchi["name"] = tamagotchi_names[tamagotchis.index(tamagotchi)]
-        return Response(ResponseType.valid, View('personalization', {'player': self.player,
+        return Response(ResponseType.valid, ConsoleView('personalization', {'player': self.player,
                                                                      'tamagotchi_status': print_status(),
                                                                      'tamagotchis': tamagotchis}, request.json))

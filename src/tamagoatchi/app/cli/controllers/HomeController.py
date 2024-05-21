@@ -2,8 +2,7 @@ import json
 
 from tamagoatchi.lib.communication import Response, Request, ResponseType
 from tamagoatchi.lib.controller import Controller
-from tamagoatchi.lib.event import Event, EventType
-from tamagoatchi.lib.view import View
+from tamagoatchi.lib.view import ConsoleView
 
 
 class HomeController(Controller):
@@ -12,7 +11,7 @@ class HomeController(Controller):
     """
     @staticmethod
     def show_home(request: Request) -> Response:
-        view = View('', {}, request.json)
+        view = ConsoleView('', {}, request.json)
         return Response(ResponseType.valid, view)
 
     @staticmethod
