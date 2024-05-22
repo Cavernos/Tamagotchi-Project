@@ -32,7 +32,7 @@ Choisissez un nom ? ;;input playername
 
 ;;if choice == 'C'
 ;;push {player.__dict__}
-;;redirect 'game.load'
+;;redirect 'game.start'
 
 ;;if choice == 'Q'
 ;;redirect 'home.exit'

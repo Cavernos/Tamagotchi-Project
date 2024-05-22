@@ -1,0 +1,16 @@
+{error}
+C - Charger un fichier de sauvegarde
+S - Continuer
+Q - Quitter
+;;input choice
+
+;;if choice == 'C'
+{files_in_save_dir:repeat as file:{{file}}}
+Quelle sauvegarde voulez vous chargez ? ;;input filename
+;;redirect 'game.load'
+
+;;if choice == 'S'
+;;redirect 'personalization'
+
+;;if choice == 'Q'
+;;redirect 'home.exit'

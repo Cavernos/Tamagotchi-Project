@@ -1,6 +1,7 @@
 from tamagoatchi.app.cli.controllers.HomeController import *
 from tamagoatchi.app.cli.controllers.GameController import *
 from tamagoatchi.app.cli.controllers.GamePersonalizeController import *
+from tamagoatchi.app.cli.controllers.SaveController import *
 
 # Dictionnary of called controllers
 __calledControllers = {}

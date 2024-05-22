@@ -1,0 +1,14 @@
+S - Sauvegarder et quitter
+Q - Quitter sans sauvegarder
+;;input choice
+
+
+;;if choice == 'S'
+Dans quel fichier voulez-vous sauvegardez votre jeu ? ;;input filename
+;;push {tamagotchis}
+;;push {player}
+;;push {game_duration}
+
+;;if choice == 'Q'
+;;redirect 'home.exit'
+

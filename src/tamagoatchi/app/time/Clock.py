@@ -26,6 +26,7 @@ class Clock(threading.Thread, Model):
         statement : str
             reason why the thread was stopped
        """
+
     def __init__(self, name: str) -> None:
         """
         Parameters
@@ -66,12 +67,11 @@ class Clock(threading.Thread, Model):
         self._days += 1
         self.run()
 
-
     def calc_game_time(self):
         """
         Calculation of the game time in 24 hour bases
         """
-        self.game_time[1] += (24*60) // DAY_DURATION
+        self.game_time[1] += (24 * 60) // DAY_DURATION
         if self.game_time[1] >= 60:
             self.game_time[0] += 1
             self.game_time[1] = self.game_time[1] % 60
@@ -82,7 +82,12 @@ class Clock(threading.Thread, Model):
         """
         Print Time is a time printer
         """
-        print(f"{"0" if self.game_time[0] < 10 else ""}{self.game_time[0]}:{"0" if self.game_time[1] < 10 else ""}{self.game_time[1]}")
+        print(
+            f"{"0" if self.game_time[0] < 10 else ""}{self.game_time[0]}:{"0" if self.game_time[1] < 10 else ""}{self.game_time[1]}")
+
+    def stop(self):
+        self.event.set()
+        return str(self.day_duration)
 
     @property
     def days(self) -> int:

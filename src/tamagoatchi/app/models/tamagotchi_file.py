@@ -10,7 +10,7 @@ from tamagoatchi.app.definitions import NUMBER_OF_TAMAGOTCHI, NOT_PRINTABLE_KEYS
 # Lists of Tamagotchis
 tamagotchis = [
     {
-        "name": "Michel",
+        "name": f"Michel {i + 1}",
         "hunger": CARACTERISTICS_INITIAL_VALUE,
         "health": CARACTERISTICS_INITIAL_VALUE,
         "boredom": CARACTERISTICS_INITIAL_VALUE,
