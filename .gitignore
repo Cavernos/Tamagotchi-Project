@@ -3,6 +3,7 @@ __pycache__/
 venv
 src/tamgotchi_game.egg-info
 src/jeu.py
+src/tamagoatchi/saves/*.json
 commentaires.txt
 build
 tamagoatchi.log
