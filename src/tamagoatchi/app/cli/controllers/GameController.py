@@ -91,7 +91,13 @@ class GameController(Controller):
         for tamagotchi in tamagotchi_file.tamagotchis:
             if tamagotchi['name'] == name_of_tamagotchi and self.clock.day_duration > tamagotchi['night_duration']:
                 player.play_with(tamagotchi)
-        request.json['form_redirect'] = 'game.load'
+            elif not self.clock.day_duration > tamagotchi['night_duration']:
+                request.json['form_redirect'] = 'game.start'
+                return Response(ResponseType.error, ConsoleView("game",
+                                                        {'player': player, 'tamagotchis': tamagotchi_file,
+                                                         "error": "Le tamagotchi dort"},
+                                                        request.json))
+        request.json['form_redirect'] = 'game.start'
         return Response(ResponseType.valid, ConsoleView("game",
                                                         {'player': player, 'tamagotchis': tamagotchi_file},
                                                         request.json))
@@ -110,7 +116,13 @@ class GameController(Controller):
         for tamagotchi in tamagotchi_file.tamagotchis:
             if tamagotchi['name'] == name_of_tamagotchi and self.clock.day_duration > tamagotchi['night_duration']:
                 player.give_biscuit(tamagotchi)
-        request.json['form_redirect'] = 'game.load'
+            elif not self.clock.day_duration > tamagotchi['night_duration']:
+                request.json['form_redirect'] = 'game.start'
+                return Response(ResponseType.error, ConsoleView("game",
+                                                        {'player': player, 'tamagotchis': tamagotchi_file,
+                                                         "error": "Le tamagotchi dort"},
+                                                        request.json))
+        request.json['form_redirect'] = 'game.start'
         return Response(ResponseType.valid, ConsoleView("game",
                                                         {'player': player, 'tamagotchis': tamagotchi_file},
                                                         request.json))
