@@ -1,7 +1,5 @@
 import enum
-from typing import List
-
-from tamagoatchi.lib.event import Observer
+from inspect import signature
 
 
 class EventType(enum.Enum):
@@ -17,20 +15,3 @@ class Event:
 
     def __str__(self) -> str:
         return 'Event Type: ' + self.event_type.name + ', Message: ' + self.message
-
-
-class EventHandler:
-    __observers: List[Observer]
-
-    def __init__(self) -> None:
-        self.__observers = []
-
-    def dispatch(self, event: Event) -> None:
-        for observer in self.__observers:
-            observer.notify(event)
-
-    def add_to_subscription(self, observer: Observer) -> None:
-        self.__observers.append(observer)
-
-    def cancel_subscription(self, observer: Observer) -> None:
-        self.__observers.remove(observer)
