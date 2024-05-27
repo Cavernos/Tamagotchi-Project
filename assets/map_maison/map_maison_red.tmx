@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="16" height="9" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="7">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="16" height="9" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="12">
  <tileset firstgid="1" source="../tamagotchis/tamagotchis.tsx"/>
  <tileset firstgid="7" source="textures/ground_demo.tsx"/>
  <tileset firstgid="263" source="textures/ground.tsx"/>
@@ -7,6 +7,9 @@
  <tileset firstgid="389" source="textures/objects_demo.tsx"/>
  <tileset firstgid="1413" source="textures/premade_buildings_demo.tsx"/>
  <tileset firstgid="2437" source="../colors.tsx"/>
+ <tileset firstgid="2462" source="textures/back.tsx"/>
+ <tileset firstgid="2463" source="textures/tamagotchi_stat.tsx"/>
+ <tileset firstgid="2471" source="textures/tamagotchi_stat.tsx"/>
  <layer id="10" name="ground" width="16" height="9">
   <data encoding="csv">
 13,13,13,12,12,12,12,12,12,12,12,12,12,12,12,12,
@@ -49,21 +52,33 @@
  <layer id="4" name="tamagotchis" width="16" height="9">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,1,0,0,0,0,0,0,0,0,0,5,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,2471,2472,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,2473,2474,0,0,0,0,0,0,0,0,0,
+0,0,0,1,0,2475,2476,0,0,0,0,0,0,5,0,0,
+0,0,0,0,0,2477,2478,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,
 0,0,0,2,0,0,0,0,0,3,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <layer id="13" name="boutons" width="16" height="9">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2462,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
  <objectgroup id="5" name="boutons">
-  <object id="1" type="red" x="48" y="48" width="16" height="16"/>
-  <object id="3" type="yellow" x="48" y="112" width="16" height="16"/>
-  <object id="4" type="green" x="144" y="112" width="16" height="16"/>
-  <object id="5" type="pink" x="208" y="48" width="16" height="16"/>
-  <object id="6" type="blue" x="192" y="96" width="16" height="16"/>
+  <object id="1" type="view_all_tamagotchis" x="2" y="57" width="12" height="9"/>
+  <object id="8" type="feed" x="92" y="57" width="10" height="9"/>
+  <object id="10" type="play" x="82" y="57" width="9" height="9"/>
+  <object id="11" type="feed" x="102" y="57" width="9" height="9"/>
  </objectgroup>
 </map>

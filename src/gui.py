@@ -25,7 +25,6 @@ class Gui:
         self.ratio = 16 / 9
         self.height = 576
         self.width = int(self.height * self.ratio)
-        self.zoom = 4
 
         # screen
         self.screen = pygame.display.set_mode((self.width, self.height), pygame.RESIZABLE)
@@ -35,11 +34,12 @@ class Gui:
 
         # Jouer la musique de fond
         pygame.mixer.music.load("./assets/sound/main_theme.mp3")
-        pygame.mixer.music.play(-1)  # -1 signifie boucle infinie
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.5)
         
         self.pygame_clock = pygame.time.Clock()
         self.pygame_clock.tick(30)
-       
+
     def run(self):
         self.menu()
         in_game = True
@@ -51,7 +51,7 @@ class Gui:
                 if event.type == pygame.QUIT:
                     in_game = False
                 elif event.type == pygame.VIDEORESIZE:
-                    self.resize_window(event)
+                    self.resize_window()
                 
                 # check keys
                 elif event.type == pygame.KEYDOWN:
@@ -93,7 +93,6 @@ class Gui:
         self.map_data = pyscroll.data.TiledMapData(self.map)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(self.map_data, self.screen.get_size())
         self.calcul_zoom()
-        self.map_layer.zoom = self.zoom
 
         self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
         self.group.draw(self.screen)
@@ -106,7 +105,6 @@ class Gui:
         self.map_data = pyscroll.data.TiledMapData(self.map)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(self.map_data, self.screen.get_size())
         self.calcul_zoom()
-        self.map_layer.zoom = self.zoom
 
         self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
         self.group.draw(self.screen)
@@ -119,7 +117,6 @@ class Gui:
         self.map_data = pyscroll.data.TiledMapData(self.map)
         self.map_layer = pyscroll.orthographic.BufferedRenderer(self.map_data, self.screen.get_size())
         self.calcul_zoom()
-        self.map_layer.zoom = self.zoom
 
         self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
         self.group.draw(self.screen)
@@ -128,32 +125,35 @@ class Gui:
         for layer in self.map.objectgroups:
             for obj in layer:
                 self.tamagotchis_positions[obj.type] = (obj.x+16), obj.y
-        print(self.tamagotchis_positions)
 
         self.create_buttons()
 
     def view_tamagotchi(self, tamagotchi):
         self.display = f"{tamagotchi}"
-        self.map_layer.zoom = self.zoom * 2
+        self.map = pytmx.util_pygame.load_pygame(f'./assets/{self.name_map}/{self.name_map}_{tamagotchi}.tmx')
+        self.map_data = pyscroll.data.TiledMapData(self.map)
+        self.map_layer = pyscroll.orthographic.BufferedRenderer(self.map_data, self.screen.get_size())
+        self.calcul_zoom(2)
 
+        self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
         self.group.center(self.tamagotchis_positions[tamagotchi])
         self.group.draw(self.screen)
-        self.map_layer.zoom = self.zoom
+
+        self.create_buttons()
 
     #-------------------- others --------------------#
     def create_buttons(self):
         self.buttons.clear
         for layer in self.map.objectgroups:
             for obj in layer:
-                self.buttons.append(Button(game, obj, obj.type))
+                self.buttons.append(Button(self, obj, obj.type))
 
-    def calcul_zoom(self):
+    def calcul_zoom(self, multiplicateur: int=1):
         self.height = self.screen.get_height()
         self.width = int(self.height * self.ratio)
-        self.zoom = self.height / (self.map.height * self.map.tilewidth)
+        self.map_layer.zoom = (self.height / (self.map.height * self.map.tilewidth)) * multiplicateur
 
-
-    def resize_window(self, event):
+    def resize_window(self):
         self.calcul_zoom()
         pygame.display.set_mode((self.width, self.height), pygame.RESIZABLE)
 
@@ -165,7 +165,6 @@ class Gui:
             self.view_tamagotchi(self.display)
         elif self.display == "esc":
             self.esc()
-
 
 
 if __name__ == '__main__':
