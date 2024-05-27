@@ -28,12 +28,12 @@ python -m pip install -e .[test]
 ```cmd
 pytest
 ```
-
-# Idea
-
-- Api RestFul
-- Application GUI
-- site web
-
-# Class Diagram
-![class diagram](class_diagram.png)
+## 6 - Run Project
+For GUI : 
+```cmd
+tamagoatchi -g
+```
+For console :
+```cmd
+tamagoatchi
+```
