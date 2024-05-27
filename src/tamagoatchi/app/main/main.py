@@ -1,9 +1,11 @@
-from os import system
+import os
+
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 
 import pygame, optparse
 
 from tamagoatchi.app.definitions import ROOT_SIZE, GUI_EXECUTION
-from tamagoatchi.lib.event import EventHandler, EventManager
+from tamagoatchi.lib.event import EventManager
 from tamagoatchi.lib.handlers import ResourceHandler
 from tamagoatchi.lib.view import ViewHandler
 
@@ -17,13 +19,17 @@ def main_cli():
         if view_handler.render() == -1:
             break
         view_handler.update()
-        system('cls')
+        os.system('cls')
 
 
 def main_gui():
+    """
+    Define all pygame init tools
+    Run Main loop and wait for events
+    """
     pygame.init()
     pygame.display.set_mode(ROOT_SIZE, pygame.RESIZABLE)
-    icon_path = ResourceHandler.get_resources_location() + '\\tamagotchis\\default.png'
+    icon_path = os.path.join(ResourceHandler.get_resources_location(), 'tamagotchis', 'default.png')
     icon = pygame.image.load(icon_path)
     pygame.display.set_icon(icon)
     pygame.display.set_caption('TamaGOATchi')
@@ -41,11 +47,9 @@ def main_gui():
 
 
 if __name__ == '__main__':
+    """
+    """
     if GUI_EXECUTION:
         main_gui()
     else:
         main_cli()
-    option_parser = optparse.OptionParser()
-    option_parser.add_option('-g', dest="gui", action='store_true')
-    (options, args) = option_parser.parse_args()
-    GUI_EXECUTION = options.gui

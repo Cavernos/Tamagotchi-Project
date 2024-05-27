@@ -1,4 +1,5 @@
 {error}
+\
 Votre nom {player.name}
 Vous disposez de {player.biscuits} croquettes et nous venons de vous remettre vos tamagotchis.
 Vous pouvez realisez les actions suivante:

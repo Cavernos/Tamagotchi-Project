@@ -1,7 +1,15 @@
+import os
+
 from tamagoatchi import ROOT_DIR
 
 
 class ResourceHandler:
+    """
+    Class that define some utils method to get ressources
+    """
     @staticmethod
     def get_resources_location() -> str:
-        return str(ROOT_DIR.parent) + "\\assets"
+        """
+        Method to get assets folder location folder
+        """
+        return os.path.join(str(ROOT_DIR.parent), "assets")

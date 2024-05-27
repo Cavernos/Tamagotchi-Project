@@ -1,6 +1,4 @@
 import enum
-from inspect import signature
-
 
 class EventType(enum.Enum):
     info = 0

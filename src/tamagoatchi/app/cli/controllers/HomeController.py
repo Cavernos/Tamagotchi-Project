@@ -9,9 +9,15 @@ class HomeController(Controller):
     """
     @staticmethod
     def show_home(request: Request) -> Response:
+        """
+        Method used to show home on Console Version
+        """
         view = ConsoleView('', {}, request.json)
         return Response(ResponseType.valid, view)
 
     @staticmethod
     def exit(request: Request) -> None:
+        """
+        Method used to exit program
+        """
         exit(0)

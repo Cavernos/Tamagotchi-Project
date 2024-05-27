@@ -7,9 +7,15 @@ from tamagoatchi.lib.view import GUIView
 
 
 class TamagotchiView(GUIView):
+    """
+    Class used to represent view for each tamagotchi
+    """
     file_name = 'house'
 
     def __init__(self, screen: Surface | SurfaceType, click_pos: tuple, ext_dict: dict):
+        """
+        Method that define on what tamagotchi zoom in function of it position
+        """
         super().__init__(screen, ext_dict)
         self.positions = {}
         for layer in self.map.objectgroups:
@@ -25,6 +31,9 @@ class TamagotchiView(GUIView):
         self.group.center(self.positions[tamagotchi])
 
     def on_key_pressed(self, event):
+        """
+        Method that define escape action
+        """
         super().on_key_pressed(event)
         if event.key == pygame.K_ESCAPE:
             self.redirect('home')

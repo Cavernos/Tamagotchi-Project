@@ -1,12 +1,14 @@
-from tamagoatchi.lib.communication import Response, Request, ResponseType
+from tamagoatchi.lib.communication import Request
 from tamagoatchi.lib.handlers import SaveHandler
-from tamagoatchi.lib.view import ConsoleView
 
 
 class SaveController:
 
     @staticmethod
     def save(request: Request):
+        """
+        Method used to save pass game info to save handler
+        """
         filename = request.inputs['filename']
         SaveHandler.add_file_path(filename)
         save_handler = SaveHandler()

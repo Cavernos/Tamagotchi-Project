@@ -2,9 +2,11 @@
 C - Charger un fichier de sauvegarde
 S - Continuer
 Q - Quitter
+\
 ;;input choice
 
 ;;if choice == 'C'
+Fichier de sauvegarde :
 {files_in_save_dir:repeat as file:{{file}}}
 Quelle sauvegarde voulez vous chargez ? ;;input filename
 ;;redirect 'game.load'

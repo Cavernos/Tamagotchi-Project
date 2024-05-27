@@ -1,3 +1,4 @@
+{error}
 S - Sauvegarder et quitter
 Q - Quitter sans sauvegarder
 ;;input choice

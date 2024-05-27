@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 import string
 from typing import Any
 import pyscroll
@@ -59,7 +60,7 @@ class ConsoleView(View):
         Function search the view and get all text
         """
         super().__init__(path)
-        self.qualified_path_name = str(ROOT_DIR) + '\\cli\\views\\' + path + '.txt'
+        self.qualified_path_name = os.path.join(str(ROOT_DIR), 'cli', 'views', path + '.txt')
         self.inputs = {}
         self.objects = objects
         with open(self.qualified_path_name, 'r') as file:
@@ -203,11 +204,23 @@ class ConsoleView(View):
 
 
 class GUIView:
+    """
+    Class that define GUI View
+    """
+
+    """
+    View Filename
+    """
     file_name = ''
 
     def __init__(self, screen, ext_dict: dict) -> None:
+        """
+        Set file name and init map from tiled files
+        """
         GUIView.file_name = type(self).__name__.split('View')[0].lower()
-        self.view_location = ResourceHandler.get_resources_location() + 2 * f'\\{type(self).file_name}' + '.tmx'
+        self.view_location = os.path.join(
+            ResourceHandler.get_resources_location(),
+            f'{type(self).file_name}', f'{type(self).file_name}' + '.tmx')
         self.header = ext_dict
         self.screen = screen
         self.map = pytmx.util_pygame.load_pygame(self.view_location)
@@ -216,6 +229,10 @@ class GUIView:
         self.zoom = int(self.screen.get_height()) / (self.map.height * self.map.tilewidth)
         self.map_layer.zoom = self.zoom
         self.buttons = []
+
+        """
+        Register Events
+        """
         self.event_managers = {"View Manager": EventManager.from_id("View Manager"),
                                "Key Manager": EventManager.from_id("Key Manager")}
         self.event_managers["Key Manager"].register(pygame.KEYDOWN, self.on_key_pressed)
@@ -224,9 +241,15 @@ class GUIView:
         self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
 
     def render(self):
+        """
+        Draw tile map
+        """
         self.group.draw(self.screen)
 
     def redirect(self, location: str, **header):
+        """
+        redirect user on other view
+        """
         self.deregister_events()
         for button in self.buttons:
             button.destroy()
@@ -235,6 +258,9 @@ class GUIView:
             self.header['ext'] = header
 
     def deregister_events(self):
+        """
+        disable all events
+        """
         for key, value in self.event_managers.items():
             if key == "View Manager":
                 value.deregister(pygame.QUIT, self.quit)
@@ -244,11 +270,17 @@ class GUIView:
 
     @staticmethod
     def quit(event):
+        """
+        Quit event action
+        """
         pygame.quit()
         exit(0)
 
     @staticmethod
     def on_resize(event):
+        """
+        Videoresize event action
+        """
         pygame.display.set_mode(event.dict['size'], pygame.RESIZABLE | pygame.HWSURFACE | pygame.DOUBLEBUF)
 
     def on_key_pressed(self, event):
