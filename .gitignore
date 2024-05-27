@@ -1,7 +1,8 @@
+dist
 .idea
 __pycache__/
 venv
-src/tamgotchi_game.egg-info
+src/tamgoatchi.egg-info
 src/jeu.py
 src/tamagoatchi/saves/*.json
 commentaires.txt

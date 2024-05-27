@@ -1,0 +1,2 @@
+[console_scripts]
+tamagoatchi = tamagoatchi.app.main.main:main

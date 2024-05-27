@@ -46,10 +46,12 @@ def main_gui():
         pygame.display.flip()
 
 
-if __name__ == '__main__':
-    """
-    """
+def main():
     if GUI_EXECUTION:
         main_gui()
     else:
         main_cli()
+
+
+if __name__ == '__main__':
+    main()
