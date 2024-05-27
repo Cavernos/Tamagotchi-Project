@@ -78,7 +78,7 @@
  <objectgroup id="5" name="boutons">
   <object id="1" type="view_all_tamagotchis" x="2" y="57" width="12" height="9"/>
   <object id="8" type="feed" x="92" y="57" width="10" height="9"/>
-  <object id="10" type="play" x="82" y="57" width="9" height="9"/>
-  <object id="11" type="feed" x="102" y="57" width="9" height="9"/>
+  <object id="10" type="drink" x="82" y="57" width="9" height="9"/>
+  <object id="11" type="play" x="102" y="57" width="9" height="9"/>
  </objectgroup>
 </map>
