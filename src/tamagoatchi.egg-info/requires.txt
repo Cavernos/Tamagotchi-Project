@@ -1,0 +1,12 @@
+keyboard
+pygame
+pyyaml
+pytmx
+pyscroll>=2.06
+
+[dev]
+pylint>=2.14.0
+toml>=0.10.2
+
+[test]
+pytest>=8.1.1
